@@ -1,0 +1,1 @@
+Taken from /STM32Cube_FW_F1_V1.2.0/Drivers/STM32F1xx_HAL_Driver/ of STM32F1 Cube distribution
