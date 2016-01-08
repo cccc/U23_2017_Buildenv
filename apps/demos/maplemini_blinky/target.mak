@@ -23,10 +23,10 @@ ASFLAGS = -fdata-sections -ffunction-sections
 # Linker flags
 LDFLAGS := -lnosys -lc -Wl,--gc-sections
 LDFLAGS += -mthumb -mcpu=cortex-m3
-LDFLAGS += -Wl,-T$(ROOT)/misc/linker/f1/STM32F103XB_FLASH.ld,-Map,$(ROOT)/apps/$(TARGET)/$(TARGET).map
+LDFLAGS += -Wl,-T$(ROOT)/misc/linker/f1/STM32F103XB_FLASH.ld,-Map,$(SELF_DIR)/$(TARGET).map
 
 # Additional include paths to consider
-INCLUDES = $(ROOT)/apps/$(TARGET)/inc \
+INCLUDES = $(SELF_DIR)/inc \
            $(ROOT)/libs/libdummy/inc
 
 # Middlewares to add

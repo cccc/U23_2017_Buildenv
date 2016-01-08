@@ -1,8 +1,8 @@
 # Target file name.
-TARGET = f4discovery_demonstration
+TARGET = f4discovery_blinky
 
 # List C source files here.
-CCSOURCES = main.c stm32f4xx_hal_msp.c stm32f4xx_it.c usbd_conf.c usbd_desc.c syscalls.c
+CCSOURCES = main.c interrupts.c
 
 # List C++ source files here.
 CXXSOURCES =
@@ -23,16 +23,16 @@ ASFLAGS = -fdata-sections -ffunction-sections
 # Linker flags
 LDFLAGS := -lnosys -lc -Wl,--gc-sections
 LDFLAGS += -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16
-LDFLAGS += -Wl,-T$(ROOT)/misc/linker/f4/STM32F407VG_FLASH.ld,-Map,$(ROOT)/apps/$(TARGET)/$(TARGET).map
+LDFLAGS += -Wl,-T$(ROOT)/misc/linker/f4/STM32F407VG_FLASH.ld,-Map,$(SELF_DIR)/$(TARGET).map
 
 # Additional include paths to consider
-INCLUDES = $(ROOT)/apps/$(TARGET)/inc \
+INCLUDES = $(SELF_DIR)/inc \
            $(ROOT)/libs/libdummy/inc
 
 # Middlewares to add
 # source files are built with this target (specific for this target, so local header files are consideres)
 # include paths are added automatically
-MIDDLEWARES = cmsis stm32f4_device_407xx stm32f4_hal stm32f4_discovery_bsp usb_device_core usb_device_class_hid
+MIDDLEWARES = cmsis stm32f4_device_407xx stm32f4_hal stm32f4_discovery_bsp
 
 # Additional local static libs to link against
 LIBS = $(BINARY-libdummy)
