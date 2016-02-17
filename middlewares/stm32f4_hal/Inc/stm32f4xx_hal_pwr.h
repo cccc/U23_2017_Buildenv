@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    stm32f4xx_hal_pwr.h
   * @author  MCD Application Team
-  * @version V1.4.1
-  * @date    09-October-2015
+  * @version V1.4.4
+  * @date    22-January-2016
   * @brief   Header file of PWR HAL module.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -33,7 +33,7 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM32F4xx_HAL_PWR_H
@@ -52,14 +52,14 @@
 
 /** @addtogroup PWR
   * @{
-  */ 
+  */
 
 /* Exported types ------------------------------------------------------------*/
 
 /** @defgroup PWR_Exported_Types PWR Exported Types
   * @{
   */
-   
+
 /**
   * @brief  PWR PVD configuration structure definition
   */
@@ -80,18 +80,18 @@ typedef struct
 /** @defgroup PWR_Exported_Constants PWR Exported Constants
   * @{
   */
-  
+
 /** @defgroup PWR_WakeUp_Pins PWR WakeUp Pins
   * @{
   */
-#define PWR_WAKEUP_PIN1                 ((uint32_t)0x00000100)
+#define PWR_WAKEUP_PIN1                 ((uint32_t)0x00000100U)
 /**
   * @}
   */
 
 /** @defgroup PWR_PVD_detection_level PWR PVD detection level
   * @{
-  */ 
+  */
 #define PWR_PVDLEVEL_0                  PWR_CR_PLS_LEV0
 #define PWR_PVDLEVEL_1                  PWR_CR_PLS_LEV1
 #define PWR_PVDLEVEL_2                  PWR_CR_PLS_LEV2
@@ -99,22 +99,22 @@ typedef struct
 #define PWR_PVDLEVEL_4                  PWR_CR_PLS_LEV4
 #define PWR_PVDLEVEL_5                  PWR_CR_PLS_LEV5
 #define PWR_PVDLEVEL_6                  PWR_CR_PLS_LEV6
-#define PWR_PVDLEVEL_7                  PWR_CR_PLS_LEV7/* External input analog voltage 
+#define PWR_PVDLEVEL_7                  PWR_CR_PLS_LEV7/* External input analog voltage
                                                           (Compare internally to VREFINT) */
 /**
   * @}
-  */   
- 
+  */
+
 /** @defgroup PWR_PVD_Mode PWR PVD Mode
   * @{
   */
-#define PWR_PVD_MODE_NORMAL                 ((uint32_t)0x00000000)   /*!< basic mode is used */
-#define PWR_PVD_MODE_IT_RISING              ((uint32_t)0x00010001)   /*!< External Interrupt Mode with Rising edge trigger detection */
-#define PWR_PVD_MODE_IT_FALLING             ((uint32_t)0x00010002)   /*!< External Interrupt Mode with Falling edge trigger detection */
-#define PWR_PVD_MODE_IT_RISING_FALLING      ((uint32_t)0x00010003)   /*!< External Interrupt Mode with Rising/Falling edge trigger detection */
-#define PWR_PVD_MODE_EVENT_RISING           ((uint32_t)0x00020001)   /*!< Event Mode with Rising edge trigger detection */
-#define PWR_PVD_MODE_EVENT_FALLING          ((uint32_t)0x00020002)   /*!< Event Mode with Falling edge trigger detection */
-#define PWR_PVD_MODE_EVENT_RISING_FALLING   ((uint32_t)0x00020003)   /*!< Event Mode with Rising/Falling edge trigger detection */
+#define PWR_PVD_MODE_NORMAL                 ((uint32_t)0x00000000U)   /*!< basic mode is used */
+#define PWR_PVD_MODE_IT_RISING              ((uint32_t)0x00010001U)   /*!< External Interrupt Mode with Rising edge trigger detection */
+#define PWR_PVD_MODE_IT_FALLING             ((uint32_t)0x00010002U)   /*!< External Interrupt Mode with Falling edge trigger detection */
+#define PWR_PVD_MODE_IT_RISING_FALLING      ((uint32_t)0x00010003U)   /*!< External Interrupt Mode with Rising/Falling edge trigger detection */
+#define PWR_PVD_MODE_EVENT_RISING           ((uint32_t)0x00020001U)   /*!< Event Mode with Rising edge trigger detection */
+#define PWR_PVD_MODE_EVENT_FALLING          ((uint32_t)0x00020002U)   /*!< Event Mode with Falling edge trigger detection */
+#define PWR_PVD_MODE_EVENT_RISING_FALLING   ((uint32_t)0x00020003U)   /*!< Event Mode with Rising/Falling edge trigger detection */
 /**
   * @}
   */
@@ -123,17 +123,17 @@ typedef struct
 /** @defgroup PWR_Regulator_state_in_STOP_mode PWR Regulator state in SLEEP/STOP mode
   * @{
   */
-#define PWR_MAINREGULATOR_ON                        ((uint32_t)0x00000000)
+#define PWR_MAINREGULATOR_ON                        ((uint32_t)0x00000000U)
 #define PWR_LOWPOWERREGULATOR_ON                    PWR_CR_LPDS
 /**
   * @}
   */
-    
+
 /** @defgroup PWR_SLEEP_mode_entry PWR SLEEP mode entry
   * @{
   */
-#define PWR_SLEEPENTRY_WFI              ((uint8_t)0x01)
-#define PWR_SLEEPENTRY_WFE              ((uint8_t)0x02)
+#define PWR_SLEEPENTRY_WFI              ((uint8_t)0x01U)
+#define PWR_SLEEPENTRY_WFE              ((uint8_t)0x02U)
 /**
   * @}
   */
@@ -141,8 +141,8 @@ typedef struct
 /** @defgroup PWR_STOP_mode_entry PWR STOP mode entry
   * @{
   */
-#define PWR_STOPENTRY_WFI               ((uint8_t)0x01)
-#define PWR_STOPENTRY_WFE               ((uint8_t)0x02)
+#define PWR_STOPENTRY_WFI               ((uint8_t)0x01U)
+#define PWR_STOPENTRY_WFE               ((uint8_t)0x02U)
 /**
   * @}
   */
@@ -161,8 +161,8 @@ typedef struct
 
 /**
   * @}
-  */ 
-  
+  */
+
 /* Exported macro ------------------------------------------------------------*/
 /** @defgroup PWR_Exported_Macro PWR Exported Macro
   * @{
@@ -171,21 +171,21 @@ typedef struct
 /** @brief  Check PWR flag is set or not.
   * @param  __FLAG__: specifies the flag to check.
   *           This parameter can be one of the following values:
-  *            @arg PWR_FLAG_WU: Wake Up flag. This flag indicates that a wakeup event 
-  *                  was received from the WKUP pin or from the RTC alarm (Alarm A 
+  *            @arg PWR_FLAG_WU: Wake Up flag. This flag indicates that a wakeup event
+  *                  was received from the WKUP pin or from the RTC alarm (Alarm A
   *                  or Alarm B), RTC Tamper event, RTC TimeStamp event or RTC Wakeup.
-  *                  An additional wakeup event is detected if the WKUP pin is enabled 
-  *                  (by setting the EWUP bit) when the WKUP pin level is already high.  
+  *                  An additional wakeup event is detected if the WKUP pin is enabled
+  *                  (by setting the EWUP bit) when the WKUP pin level is already high.
   *            @arg PWR_FLAG_SB: StandBy flag. This flag indicates that the system was
-  *                  resumed from StandBy mode.    
-  *            @arg PWR_FLAG_PVDO: PVD Output. This flag is valid only if PVD is enabled 
-  *                  by the HAL_PWR_EnablePVD() function. The PVD is stopped by Standby mode 
+  *                  resumed from StandBy mode.
+  *            @arg PWR_FLAG_PVDO: PVD Output. This flag is valid only if PVD is enabled
+  *                  by the HAL_PWR_EnablePVD() function. The PVD is stopped by Standby mode
   *                  For this reason, this bit is equal to 0 after Standby or reset
   *                  until the PVDE bit is set.
-  *            @arg PWR_FLAG_BRR: Backup regulator ready flag. This bit is not reset 
-  *                  when the device wakes up from Standby mode or by a system reset 
-  *                  or power reset.  
-  *            @arg PWR_FLAG_VOSRDY: This flag indicates that the Regulator voltage 
+  *            @arg PWR_FLAG_BRR: Backup regulator ready flag. This bit is not reset
+  *                  when the device wakes up from Standby mode or by a system reset
+  *                  or power reset.
+  *            @arg PWR_FLAG_VOSRDY: This flag indicates that the Regulator voltage
   *                 scaling output selection is ready.
   * @retval The new state of __FLAG__ (TRUE or FALSE).
   */
@@ -197,7 +197,7 @@ typedef struct
   *            @arg PWR_FLAG_WU: Wake Up flag
   *            @arg PWR_FLAG_SB: StandBy flag
   */
-#define __HAL_PWR_CLEAR_FLAG(__FLAG__) (PWR->CR |=  (__FLAG__) << 2)
+#define __HAL_PWR_CLEAR_FLAG(__FLAG__) (PWR->CR |=  (__FLAG__) << 2U)
 
 /**
   * @brief Enable the PVD Exti Line 16.
@@ -253,14 +253,18 @@ typedef struct
   * @brief  PVD EXTI line configuration: set rising & falling edge trigger.
   * @retval None.
   */
-#define __HAL_PWR_PVD_EXTI_ENABLE_RISING_FALLING_EDGE()   __HAL_PWR_PVD_EXTI_ENABLE_RISING_EDGE();__HAL_PWR_PVD_EXTI_ENABLE_FALLING_EDGE();
+#define __HAL_PWR_PVD_EXTI_ENABLE_RISING_FALLING_EDGE()   do{__HAL_PWR_PVD_EXTI_ENABLE_RISING_EDGE();\
+                                                             __HAL_PWR_PVD_EXTI_ENABLE_FALLING_EDGE();\
+                                                            }while(0)
 
 /**
   * @brief Disable the PVD Extended Interrupt Rising & Falling Trigger.
   * This parameter can be:
   * @retval None.
   */
-#define __HAL_PWR_PVD_EXTI_DISABLE_RISING_FALLING_EDGE()  __HAL_PWR_PVD_EXTI_DISABLE_RISING_EDGE();__HAL_PWR_PVD_EXTI_DISABLE_FALLING_EDGE();
+#define __HAL_PWR_PVD_EXTI_DISABLE_RISING_FALLING_EDGE()  do{__HAL_PWR_PVD_EXTI_DISABLE_RISING_EDGE();\
+                                                             __HAL_PWR_PVD_EXTI_DISABLE_FALLING_EDGE();\
+                                                            }while(0)
 
 /**
   * @brief checks whether the specified PVD Exti interrupt flag is set or not.
@@ -291,8 +295,8 @@ typedef struct
 /** @addtogroup PWR_Exported_Functions PWR Exported Functions
   * @{
   */
-  
-/** @addtogroup PWR_Exported_Functions_Group1 Initialization and de-initialization functions 
+
+/** @addtogroup PWR_Exported_Functions_Group1 Initialization and de-initialization functions
   * @{
   */
 /* Initialization and de-initialization functions *****************************/
@@ -303,7 +307,7 @@ void HAL_PWR_DisableBkUpAccess(void);
   * @}
   */
 
-/** @addtogroup PWR_Exported_Functions_Group2 Peripheral Control functions 
+/** @addtogroup PWR_Exported_Functions_Group2 Peripheral Control functions
   * @{
   */
 /* Peripheral Control functions  **********************************************/
@@ -358,8 +362,8 @@ void HAL_PWR_DisableSEVOnPend(void);
   */
 /* ------------- PWR registers bit address in the alias region ---------------*/
 #define PWR_OFFSET               (PWR_BASE - PERIPH_BASE)
-#define PWR_CR_OFFSET            0x00
-#define PWR_CSR_OFFSET           0x04
+#define PWR_CR_OFFSET            0x00U
+#define PWR_CSR_OFFSET           0x04U
 #define PWR_CR_OFFSET_BB         (PWR_OFFSET + PWR_CR_OFFSET)
 #define PWR_CSR_OFFSET_BB        (PWR_OFFSET + PWR_CSR_OFFSET)
 /**
@@ -372,15 +376,15 @@ void HAL_PWR_DisableSEVOnPend(void);
 /* --- CR Register ---*/
 /* Alias word address of DBP bit */
 #define DBP_BIT_NUMBER   POSITION_VAL(PWR_CR_DBP)
-#define CR_DBP_BB        (uint32_t)(PERIPH_BB_BASE + (PWR_CR_OFFSET_BB * 32) + (DBP_BIT_NUMBER * 4))
+#define CR_DBP_BB        (uint32_t)(PERIPH_BB_BASE + (PWR_CR_OFFSET_BB * 32U) + (DBP_BIT_NUMBER * 4U))
 
 /* Alias word address of PVDE bit */
 #define PVDE_BIT_NUMBER  POSITION_VAL(PWR_CR_PVDE)
-#define CR_PVDE_BB       (uint32_t)(PERIPH_BB_BASE + (PWR_CR_OFFSET_BB * 32) + (PVDE_BIT_NUMBER * 4))
+#define CR_PVDE_BB       (uint32_t)(PERIPH_BB_BASE + (PWR_CR_OFFSET_BB * 32U) + (PVDE_BIT_NUMBER * 4U))
 
 /* Alias word address of PMODE bit */
 #define PMODE_BIT_NUMBER  POSITION_VAL(PWR_CR_PMODE)
-#define CR_PMODE_BB      (uint32_t)(PERIPH_BB_BASE + (PWR_CR_OFFSET_BB * 32) + (PMODE_BIT_NUMBER * 4))
+#define CR_PMODE_BB      (uint32_t)(PERIPH_BB_BASE + (PWR_CR_OFFSET_BB * 32U) + (PMODE_BIT_NUMBER * 4U))
 /**
   * @}
   */
@@ -391,7 +395,7 @@ void HAL_PWR_DisableSEVOnPend(void);
 /* --- CSR Register ---*/
 /* Alias word address of EWUP bit */
 #define EWUP_BIT_NUMBER  POSITION_VAL(PWR_CSR_EWUP)
-#define CSR_EWUP_BB      (PERIPH_BB_BASE + (PWR_CSR_OFFSET_BB * 32) + (EWUP_BIT_NUMBER * 4))
+#define CSR_EWUP_BB      (PERIPH_BB_BASE + (PWR_CSR_OFFSET_BB * 32U) + (EWUP_BIT_NUMBER * 4U))
 /**
   * @}
   */
@@ -429,12 +433,12 @@ void HAL_PWR_DisableSEVOnPend(void);
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
   */
-  
+
 #ifdef __cplusplus
 }
 #endif

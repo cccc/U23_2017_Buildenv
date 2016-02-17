@@ -16,14 +16,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Define to prevent recursive  ----------------------------------------------*/
 #ifndef __USBH_AUDIO_H
@@ -35,7 +35,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "usbh_core.h"
- 
+
 /** @addtogroup USBH_LIB
   * @{
   */
@@ -47,22 +47,22 @@
 /** @addtogroup USBH_AUDIO_CLASS
   * @{
   */
-  
+
 /** @defgroup USBH_AUDIO_CORE
   * @brief This file is the Header file for usbh_audio.c
   * @{
-  */ 
+  */
 
 
 /** @defgroup USBH_AUDIO_CORE_Exported_Types
   * @{
-  */ 
+  */
 
 /* States for AUDIO State Machine */
 typedef enum
 {
-  AUDIO_INIT = 0, 
-  AUDIO_IDLE,   
+  AUDIO_INIT = 0,
+  AUDIO_IDLE,
   AUDIO_CS_REQUESTS,
   AUDIO_SET_DEFAULT_FEATURE_UNIT,
   AUDIO_SET_INTERFACE,
@@ -78,19 +78,19 @@ typedef enum
   AUDIO_SET_INTERFACE0,
   AUDIO_SET_INTERFACE1,
   AUDIO_SET_INTERFACE2,
-  AUDIO_ISOC_OUT,        
-  AUDIO_ISOC_IN,  
+  AUDIO_ISOC_OUT,
+  AUDIO_ISOC_IN,
   AUDIO_ISOC_POLL,
-  AUDIO_ERROR,  
+  AUDIO_ERROR,
 }
 AUDIO_StateTypeDef;
 
 typedef enum
 {
   AUDIO_REQ_INIT = 1,
-  AUDIO_REQ_IDLE, 
+  AUDIO_REQ_IDLE,
   AUDIO_REQ_SET_DEFAULT_IN_INTERFACE,
-  AUDIO_REQ_SET_DEFAULT_OUT_INTERFACE,  
+  AUDIO_REQ_SET_DEFAULT_OUT_INTERFACE,
   AUDIO_REQ_SET_IN_INTERFACE,
   AUDIO_REQ_SET_OUT_INTERFACE,
   AUDIO_REQ_CS_REQUESTS,
@@ -100,11 +100,11 @@ AUDIO_ReqStateTypeDef;
 typedef enum
 {
   AUDIO_REQ_SET_VOLUME = 1,
-  AUDIO_REQ_SET_MUTE,  
+  AUDIO_REQ_SET_MUTE,
   AUDIO_REQ_GET_CURR_VOLUME,
   AUDIO_REQ_GET_MIN_VOLUME,
-  AUDIO_REQ_GET_MAX_VOLUME, 
-  AUDIO_REQ_GET_VOLUME, 
+  AUDIO_REQ_GET_MAX_VOLUME,
+  AUDIO_REQ_GET_VOLUME,
   AUDIO_REQ_GET_RESOLUTION,
   AUDIO_REQ_CS_IDLE,
 }
@@ -115,7 +115,7 @@ typedef enum
  AUDIO_PLAYBACK_INIT = 1,
  AUDIO_PLAYBACK_SET_EP,
  AUDIO_PLAYBACK_SET_EP_FREQ,
- AUDIO_PLAYBACK_PLAY,  
+ AUDIO_PLAYBACK_PLAY,
  AUDIO_PLAYBACK_IDLE,
 }
 AUDIO_PlayStateTypeDef;
@@ -123,7 +123,7 @@ AUDIO_PlayStateTypeDef;
 typedef enum
 {
  VOLUME_UP = 1,
- VOLUME_DOWN = 2,   
+ VOLUME_DOWN = 2,
 }
 AUDIO_VolumeCtrlTypeDef;
 
@@ -133,14 +133,14 @@ typedef enum
  AUDIO_CONTROL_CHANGE,
  AUDIO_CONTROL_IDLE,
  AUDIO_CONTROL_VOLUME_UP,
- AUDIO_CONTROL_VOLUME_DOWN,   
+ AUDIO_CONTROL_VOLUME_DOWN,
 }
 AUDIO_ControlStateTypeDef;
 
 
 typedef enum
 {
- AUDIO_DATA_START_OUT = 1,  
+ AUDIO_DATA_START_OUT = 1,
  AUDIO_DATA_OUT,
 }
 AUDIO_ProcessingTypeDef;
@@ -151,7 +151,7 @@ typedef struct
   uint8_t   Channels;
   uint8_t   Bits;
   uint32_t  SampleRate;
-} 
+}
 AUDIO_FormatTypeDef;
 
 typedef struct
@@ -160,8 +160,8 @@ typedef struct
   uint16_t             EpSize;
   uint8_t              AltSettings;
   uint8_t              interface;
-  uint8_t              valid; 
-  uint16_t             Poll;     
+  uint8_t              valid;
+  uint16_t             Poll;
 }
 AUDIO_STREAMING_IN_HandleTypeDef;
 
@@ -171,8 +171,8 @@ typedef struct
   uint16_t             EpSize;
   uint8_t              AltSettings;
   uint8_t              interface;
-  uint8_t              valid;  
-  uint16_t             Poll;       
+  uint8_t              valid;
+  uint16_t             Poll;
 }
 AUDIO_STREAMING_OUT_HandleTypeDef;
 
@@ -183,40 +183,40 @@ typedef struct
   uint32_t             volumeMin;
   uint32_t             volumeMax;
   uint32_t             volume;
-  uint32_t             resolution;  
-} 
+  uint32_t             resolution;
+}
 AUDIO_ControlAttributeTypeDef;
 
 typedef struct
 {
 
   uint8_t              Ep;
-  uint16_t             EpSize; 
-  uint8_t              interface; 
+  uint16_t             EpSize;
+  uint8_t              interface;
   uint8_t              AltSettings;
-  uint8_t              supported;    
+  uint8_t              supported;
 
-  uint8_t              Pipe;  
-  uint8_t              Poll; 
-  uint32_t             timer ; 
-  
-  uint8_t              asociated_as; 
-  uint8_t              asociated_mixer; 
-  uint8_t              asociated_selector; 
-  uint8_t              asociated_feature; 
+  uint8_t              Pipe;
+  uint8_t              Poll;
+  uint32_t             timer ;
+
+  uint8_t              asociated_as;
+  uint8_t              asociated_mixer;
+  uint8_t              asociated_selector;
+  uint8_t              asociated_feature;
   uint8_t              asociated_terminal;
   uint8_t              asociated_channels;
-  
-  uint32_t             frequency; 
-  uint8_t              *buf;
-  uint8_t              *cbuf; 
-  uint32_t             partial_ptr; 
 
-  uint32_t             global_ptr;  
-  uint16_t             frame_length;  
-  uint32_t             total_length; 
-  
-  AUDIO_ControlAttributeTypeDef attribute;  
+  uint32_t             frequency;
+  uint8_t              *buf;
+  uint8_t              *cbuf;
+  uint32_t             partial_ptr;
+
+  uint32_t             global_ptr;
+  uint16_t             frame_length;
+  uint32_t             total_length;
+
+  AUDIO_ControlAttributeTypeDef attribute;
 }
 AUDIO_InterfaceStreamPropTypeDef;
 
@@ -224,13 +224,13 @@ typedef struct
 {
 
   uint8_t              Ep;
-  uint16_t             EpSize; 
-  uint8_t              interface; 
-  uint8_t              supported; 
-  
-  uint8_t              Pipe;  
-  uint8_t              Poll; 
-  uint32_t             timer ; 
+  uint16_t             EpSize;
+  uint8_t              interface;
+  uint8_t              supported;
+
+  uint8_t              Pipe;
+  uint8_t              Poll;
+  uint32_t             timer ;
 }
 AUDIO_InterfaceControlPropTypeDef;
 
@@ -255,7 +255,7 @@ AUDIO_InterfaceControlPropTypeDef;
 /*Class-Specific AS(Audio Streaming) Interface Descriptor*/
 typedef struct
 {
-  uint8_t bLength; 
+  uint8_t bLength;
   uint8_t bDescriptorType;
   uint8_t bDescriptorSubtype;
   uint8_t bTerminalLink;
@@ -291,26 +291,26 @@ AUDIO_ASDescTypeDef;
 
 typedef struct
 {
-  uint8_t  bLength;                 
-  uint8_t  bDescriptorType;         
-  uint8_t  bDescriptorSubtype;      
-  uint8_t  bcdADC[2];                  
-  uint8_t  wTotalLength[2];            
-  uint8_t  bInCollection;           
-  uint8_t  baInterfaceNr[AUDIO_MAX_INTERFACE_NBR];         
-} 
+  uint8_t  bLength;
+  uint8_t  bDescriptorType;
+  uint8_t  bDescriptorSubtype;
+  uint8_t  bcdADC[2];
+  uint8_t  wTotalLength[2];
+  uint8_t  bInCollection;
+  uint8_t  baInterfaceNr[AUDIO_MAX_INTERFACE_NBR];
+}
 AUDIO_HeaderDescTypeDef;
 
 /* 4.3.2.1 Input Terminal Descriptor */
-typedef struct 
+typedef struct
 {
-  uint8_t  bLength;                 
-  uint8_t  bDescriptorType;         
-  uint8_t  bDescriptorSubtype;      
-  uint8_t  bTerminalID;             
-  uint8_t  wTerminalType[2];          
-  uint8_t  bAssocTerminal;          
-  uint8_t  bNrChannels;             
+  uint8_t  bLength;
+  uint8_t  bDescriptorType;
+  uint8_t  bDescriptorSubtype;
+  uint8_t  bTerminalID;
+  uint8_t  wTerminalType[2];
+  uint8_t  bAssocTerminal;
+  uint8_t  bNrChannels;
   uint8_t  wChannelConfig[2];
   uint8_t  iChannelNames;
   uint8_t  iTerminal;
@@ -318,48 +318,48 @@ typedef struct
 AUDIO_ITDescTypeDef;
 
 /* 4.3.2.2 Output Terminal Descriptor */
-typedef struct 
+typedef struct
 {
-  uint8_t  bLength;                 
-  uint8_t  bDescriptorType;         
-  uint8_t  bDescriptorSubtype;      
-  uint8_t  bTerminalID;             
-  uint8_t  wTerminalType[2];          
-  uint8_t  bAssocTerminal;          
-  uint8_t  bSourceID;               
+  uint8_t  bLength;
+  uint8_t  bDescriptorType;
+  uint8_t  bDescriptorSubtype;
+  uint8_t  bTerminalID;
+  uint8_t  wTerminalType[2];
+  uint8_t  bAssocTerminal;
+  uint8_t  bSourceID;
   uint8_t  iTerminal;
 }
 AUDIO_OTDescTypeDef;
 
 /* 4.3.2.3 Feature Descriptor */
 typedef struct
-{                                                             
-  uint8_t  bLength;                                        
-  uint8_t  bDescriptorType;                                
-  uint8_t  bDescriptorSubtype;                             
-  uint8_t  bUnitID;                                        
-  uint8_t  bSourceID;                                      
-  uint8_t  bControlSize;                                   
-  uint8_t  bmaControls[AUDIO_MAX_CONTROLS_NBR][2];                                                                 
+{
+  uint8_t  bLength;
+  uint8_t  bDescriptorType;
+  uint8_t  bDescriptorSubtype;
+  uint8_t  bUnitID;
+  uint8_t  bSourceID;
+  uint8_t  bControlSize;
+  uint8_t  bmaControls[AUDIO_MAX_CONTROLS_NBR][2];
 }
 AUDIO_FeatureDescTypeDef;
 
 
 /* 4.3.2.3 Feature Descriptor */
 typedef struct
-{                                                             
-  uint8_t  bLength;                                        
-  uint8_t  bDescriptorType;                                
-  uint8_t  bDescriptorSubtype;                             
-  uint8_t  bUnitID; 
-  uint8_t  bNrInPins; 
-  uint8_t  bSourceID0; 
-  uint8_t  bSourceID1;  
-  uint8_t  bNrChannels;    
-  uint8_t  bmChannelsConfig[2];                                   
-  uint8_t iChannelsNames;    
-  uint8_t bmaControls;   
-  uint8_t iMixer;   
+{
+  uint8_t  bLength;
+  uint8_t  bDescriptorType;
+  uint8_t  bDescriptorSubtype;
+  uint8_t  bUnitID;
+  uint8_t  bNrInPins;
+  uint8_t  bSourceID0;
+  uint8_t  bSourceID1;
+  uint8_t  bNrChannels;
+  uint8_t  bmChannelsConfig[2];
+  uint8_t iChannelsNames;
+  uint8_t bmaControls;
+  uint8_t iMixer;
 }
 AUDIO_MixerDescTypeDef;
 
@@ -367,14 +367,14 @@ AUDIO_MixerDescTypeDef;
 
 /* 4.3.2.3 Feature Descriptor */
 typedef struct
-{                                                             
-  uint8_t  bLength;                                        
-  uint8_t  bDescriptorType;                                
-  uint8_t  bDescriptorSubtype;                             
-  uint8_t  bUnitID;                                        
-  uint8_t  bNrInPins; 
-  uint8_t  bSourceID0;  
-  uint8_t  iSelector;                                                                   
+{
+  uint8_t  bLength;
+  uint8_t  bDescriptorType;
+  uint8_t  bDescriptorSubtype;
+  uint8_t  bUnitID;
+  uint8_t  bNrInPins;
+  uint8_t  bSourceID0;
+  uint8_t  iSelector;
 }
 AUDIO_SelectorDescTypeDef;
 
@@ -397,12 +397,12 @@ typedef struct
   AUDIO_ACDescTypeDef   cs_desc; /* Only one control descriptor*/
   AUDIO_ASDescTypeDef   as_desc[AUDIO_MAX_STREAMING_INTERFACE];
 
-  uint16_t ASNum; 
-  uint16_t InputTerminalNum;   
-  uint16_t OutputTerminalNum;  
-  uint16_t FeatureUnitNum;    
-  uint16_t SelectorUnitNum;    
-  uint16_t MixerUnitNum;    
+  uint16_t ASNum;
+  uint16_t InputTerminalNum;
+  uint16_t OutputTerminalNum;
+  uint16_t FeatureUnitNum;
+  uint16_t SelectorUnitNum;
+  uint16_t MixerUnitNum;
 }
 AUDIO_ClassSpecificDescTypedef;
 
@@ -410,31 +410,31 @@ AUDIO_ClassSpecificDescTypedef;
 typedef struct _AUDIO_Process
 {
   AUDIO_ReqStateTypeDef              req_state;
-  AUDIO_CSReqStateTypeDef            cs_req_state;  
-  AUDIO_PlayStateTypeDef             play_state;  
-  AUDIO_ControlStateTypeDef          control_state; 
+  AUDIO_CSReqStateTypeDef            cs_req_state;
+  AUDIO_PlayStateTypeDef             play_state;
+  AUDIO_ControlStateTypeDef          control_state;
   AUDIO_ProcessingTypeDef            processing_state;
-  
+
   AUDIO_STREAMING_IN_HandleTypeDef   stream_in[AUDIO_MAX_AUDIO_STD_INTERFACE];
   AUDIO_STREAMING_OUT_HandleTypeDef  stream_out[AUDIO_MAX_AUDIO_STD_INTERFACE];
   AUDIO_ClassSpecificDescTypedef     class_desc;
-  
+
   AUDIO_InterfaceStreamPropTypeDef   headphone;
-  AUDIO_InterfaceStreamPropTypeDef   microphone; 
+  AUDIO_InterfaceStreamPropTypeDef   microphone;
   AUDIO_InterfaceControlPropTypeDef  control;
-  uint16_t                            mem [8];  
-  uint8_t                            temp_feature;   
-  uint8_t                            temp_channels;      
+  uint16_t                            mem [8];
+  uint8_t                            temp_feature;
+  uint8_t                            temp_channels;
 }
 AUDIO_HandleTypeDef;
 
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup USBH_AUDIO_CORE_Exported_Defines
   * @{
-  */ 
+  */
 
 
 /*Audio Interface Subclass Codes*/
@@ -443,7 +443,7 @@ AUDIO_HandleTypeDef;
 /* A.2 Audio Interface Subclass Codes */
 #define USB_SUBCLASS_AUDIOCONTROL	0x01
 #define USB_SUBCLASS_AUDIOSTREAMING	0x02
-#define USB_SUBCLASS_MIDISTREAMING	0x03 
+#define USB_SUBCLASS_MIDISTREAMING	0x03
 
 #define USB_DESC_TYPE_CS_INTERFACE      0x24
 #define USB_DESC_TYPE_CS_ENDPOINT       0x25
@@ -524,35 +524,35 @@ AUDIO_HandleTypeDef;
 #define UAC_TERMINAL_UNDEFINED		0x100
 #define UAC_TERMINAL_STREAMING		0x101
 #define UAC_TERMINAL_VENDOR_SPEC	0x1FF
-    
+
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup USBH_AUDIO_CORE_Exported_Macros
   * @{
-  */ 
+  */
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup USBH_AUDIO_CORE_Exported_Variables
   * @{
-  */ 
+  */
 extern USBH_ClassTypeDef  AUDIO_Class;
 #define USBH_AUDIO_CLASS    &AUDIO_Class
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup USBH_AUDIO_CORE_Exported_FunctionsPrototype
   * @{
-  */ 
-USBH_StatusTypeDef USBH_AUDIO_SetFrequency (USBH_HandleTypeDef *phost, 
+  */
+USBH_StatusTypeDef USBH_AUDIO_SetFrequency (USBH_HandleTypeDef *phost,
                                             uint16_t sample_rate,
                                             uint8_t  channel_num,
                                             uint8_t data_width);
-  
+
 USBH_StatusTypeDef USBH_AUDIO_Play (USBH_HandleTypeDef *phost, uint8_t *buf, uint32_t length);
 USBH_StatusTypeDef USBH_AUDIO_Stop (USBH_HandleTypeDef *phost);
 USBH_StatusTypeDef USBH_AUDIO_Suspend (USBH_HandleTypeDef *phost);
@@ -567,7 +567,7 @@ void        USBH_AUDIO_FrequencySet(USBH_HandleTypeDef *phost);
 void        USBH_AUDIO_BufferEmptyCallback(USBH_HandleTypeDef *phost);
 /**
   * @}
-  */ 
+  */
 
 #ifdef __cplusplus
 }
@@ -577,18 +577,18 @@ void        USBH_AUDIO_BufferEmptyCallback(USBH_HandleTypeDef *phost);
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
 

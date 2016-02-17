@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    stm32f4xx_hal_sram.h
   * @author  MCD Application Team
-  * @version V1.4.1
-  * @date    09-October-2015
+  * @version V1.4.4
+  * @date    22-January-2016
   * @brief   Header file of SRAM HAL module.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -33,7 +33,7 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM32F4xx_HAL_SRAM_H
@@ -44,9 +44,9 @@
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#if defined(STM32F405xx) || defined(STM32F415xx) || defined(STM32F407xx)|| defined(STM32F417xx) 
+#if defined(STM32F405xx) || defined(STM32F415xx) || defined(STM32F407xx)|| defined(STM32F417xx)
   #include "stm32f4xx_ll_fsmc.h"
-#endif /* STM32F405xx || STM32F415xx || STM32F407xx || STM32F417xx  */
+#endif /* STM32F405xx || STM32F415xx || STM32F407xx || STM32F417xx */
 
 #if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F429xx)|| defined(STM32F439xx) ||\
  defined(STM32F446xx) || defined(STM32F469xx) || defined(STM32F479xx)
@@ -60,48 +60,48 @@
 
 #if defined(STM32F405xx) || defined(STM32F415xx) || defined(STM32F407xx) || defined(STM32F417xx) ||\
     defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F429xx) || defined(STM32F439xx) ||\
-	defined(STM32F446xx) || defined(STM32F469xx) || defined(STM32F479xx) 
+    defined(STM32F446xx) || defined(STM32F469xx) || defined(STM32F479xx)
 
 /** @addtogroup SRAM
   * @{
-  */ 
+  */
 
 /* Exported typedef ----------------------------------------------------------*/
 
 /** @defgroup SRAM_Exported_Types SRAM Exported Types
   * @{
-  */ 
-/** 
-  * @brief  HAL SRAM State structures definition  
-  */ 
+  */
+/**
+  * @brief  HAL SRAM State structures definition
+  */
 typedef enum
 {
-  HAL_SRAM_STATE_RESET     = 0x00,  /*!< SRAM not yet initialized or disabled           */
-  HAL_SRAM_STATE_READY     = 0x01,  /*!< SRAM initialized and ready for use             */
-  HAL_SRAM_STATE_BUSY      = 0x02,  /*!< SRAM internal process is ongoing               */
-  HAL_SRAM_STATE_ERROR     = 0x03,  /*!< SRAM error state                               */
-  HAL_SRAM_STATE_PROTECTED = 0x04   /*!< SRAM peripheral NORSRAM device write protected */
-  
+  HAL_SRAM_STATE_RESET     = 0x00U,  /*!< SRAM not yet initialized or disabled           */
+  HAL_SRAM_STATE_READY     = 0x01U,  /*!< SRAM initialized and ready for use             */
+  HAL_SRAM_STATE_BUSY      = 0x02U,  /*!< SRAM internal process is ongoing               */
+  HAL_SRAM_STATE_ERROR     = 0x03U,  /*!< SRAM error state                               */
+  HAL_SRAM_STATE_PROTECTED = 0x04U   /*!< SRAM peripheral NORSRAM device write protected */
+
 }HAL_SRAM_StateTypeDef;
 
-/** 
-  * @brief  SRAM handle Structure definition  
-  */ 
+/**
+  * @brief  SRAM handle Structure definition
+  */
 typedef struct
 {
-  FMC_NORSRAM_TypeDef           *Instance;  /*!< Register base address                        */ 
-  
+  FMC_NORSRAM_TypeDef           *Instance;  /*!< Register base address                        */
+
   FMC_NORSRAM_EXTENDED_TypeDef  *Extended;  /*!< Extended mode register base address          */
-  
+
   FMC_NORSRAM_InitTypeDef       Init;       /*!< SRAM device control configuration parameters */
 
-  HAL_LockTypeDef               Lock;       /*!< SRAM locking object                          */ 
-  
+  HAL_LockTypeDef               Lock;       /*!< SRAM locking object                          */
+
   __IO HAL_SRAM_StateTypeDef    State;      /*!< SRAM device access state                     */
-  
+
   DMA_HandleTypeDef             *hdma;      /*!< Pointer DMA handler                          */
-  
-}SRAM_HandleTypeDef; 
+
+}SRAM_HandleTypeDef;
 
 /**
   * @}
@@ -141,7 +141,7 @@ void              HAL_SRAM_DMA_XferCpltCallback(DMA_HandleTypeDef *hdma);
 void              HAL_SRAM_DMA_XferErrorCallback(DMA_HandleTypeDef *hdma);
 /**
   * @}
-  */ 
+  */
 
 /** @addtogroup SRAM_Exported_Functions_Group2
  *  @{
@@ -157,7 +157,7 @@ HAL_StatusTypeDef HAL_SRAM_Read_DMA(SRAM_HandleTypeDef *hsram, uint32_t *pAddres
 HAL_StatusTypeDef HAL_SRAM_Write_DMA(SRAM_HandleTypeDef *hsram, uint32_t *pAddress, uint32_t *pSrcBuffer, uint32_t BufferSize);
 /**
   * @}
-  */ 
+  */
 
 /** @addtogroup SRAM_Exported_Functions_Group3
  *  @{
@@ -167,7 +167,7 @@ HAL_StatusTypeDef HAL_SRAM_WriteOperation_Enable(SRAM_HandleTypeDef *hsram);
 HAL_StatusTypeDef HAL_SRAM_WriteOperation_Disable(SRAM_HandleTypeDef *hsram);
 /**
   * @}
-  */ 
+  */
 
 /** @addtogroup SRAM_Exported_Functions_Group4
  *  @{
@@ -189,10 +189,10 @@ HAL_SRAM_StateTypeDef HAL_SRAM_GetState(SRAM_HandleTypeDef *hsram);
 /* Private functions ---------------------------------------------------------*/
 /**
   * @}
-  */ 
+  */
 
 #endif /* STM32F405xx || STM32F415xx || STM32F407xx || STM32F417xx || STM32F427xx || STM32F437xx ||\
-          STM32F429xx || STM32F439xx || STM32F446xx || STM32F469xx || STM32F479xx  */ 
+          STM32F429xx || STM32F439xx || STM32F446xx || STM32F469xx || STM32F479xx */
 /**
   * @}
   */

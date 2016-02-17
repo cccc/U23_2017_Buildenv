@@ -16,14 +16,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Define to prevent recursive  ----------------------------------------------*/
 #ifndef __USBH_CTLREQ_H
@@ -43,11 +43,11 @@
 /** @addtogroup USBH_LIB_CORE
 * @{
 */
-  
+
 /** @defgroup USBH_CTLREQ
-  * @brief This file is the 
+  * @brief This file is the
   * @{
-  */ 
+  */
 
 
 /** @defgroup USBH_CTLREQ_Exported_Defines
@@ -64,73 +64,73 @@
 
 /**
   * @}
-  */ 
+  */
 
 
 /** @defgroup USBH_CTLREQ_Exported_Types
   * @{
-  */ 
+  */
 /**
   * @}
-  */ 
+  */
 
 
 /** @defgroup USBH_CTLREQ_Exported_Macros
   * @{
-  */ 
+  */
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup USBH_CTLREQ_Exported_Variables
   * @{
-  */ 
+  */
 extern uint8_t USBH_CfgDesc[512];
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup USBH_CTLREQ_Exported_FunctionsPrototype
   * @{
   */
-USBH_StatusTypeDef USBH_CtlReq     (USBH_HandleTypeDef *phost, 
+USBH_StatusTypeDef USBH_CtlReq     (USBH_HandleTypeDef *phost,
                              uint8_t             *buff,
                              uint16_t            length);
 
-USBH_StatusTypeDef USBH_GetDescriptor(USBH_HandleTypeDef *phost,                                
+USBH_StatusTypeDef USBH_GetDescriptor(USBH_HandleTypeDef *phost,
                                uint8_t  req_type,
-                               uint16_t value_idx, 
-                               uint8_t* buff, 
+                               uint16_t value_idx,
+                               uint8_t* buff,
                                uint16_t length );
 
 USBH_StatusTypeDef USBH_Get_DevDesc(USBH_HandleTypeDef *phost,
                              uint8_t length);
 
-USBH_StatusTypeDef USBH_Get_StringDesc(USBH_HandleTypeDef *phost,                              
-                                uint8_t string_index, 
-                                uint8_t *buff, 
+USBH_StatusTypeDef USBH_Get_StringDesc(USBH_HandleTypeDef *phost,
+                                uint8_t string_index,
+                                uint8_t *buff,
                                 uint16_t length);
 
-USBH_StatusTypeDef USBH_SetCfg(USBH_HandleTypeDef *phost, 
+USBH_StatusTypeDef USBH_SetCfg(USBH_HandleTypeDef *phost,
                         uint16_t configuration_value);
 
-USBH_StatusTypeDef USBH_Get_CfgDesc(USBH_HandleTypeDef *phost,                              
+USBH_StatusTypeDef USBH_Get_CfgDesc(USBH_HandleTypeDef *phost,
                              uint16_t length);
 
-USBH_StatusTypeDef USBH_SetAddress(USBH_HandleTypeDef *phost,                          
+USBH_StatusTypeDef USBH_SetAddress(USBH_HandleTypeDef *phost,
                             uint8_t DeviceAddress);
 
-USBH_StatusTypeDef USBH_SetInterface(USBH_HandleTypeDef *phost, 
+USBH_StatusTypeDef USBH_SetInterface(USBH_HandleTypeDef *phost,
                         uint8_t ep_num, uint8_t altSetting);
 
-USBH_StatusTypeDef USBH_ClrFeature(USBH_HandleTypeDef *phost, 
+USBH_StatusTypeDef USBH_ClrFeature(USBH_HandleTypeDef *phost,
                                    uint8_t ep_num);
 
-USBH_DescHeader_t      *USBH_GetNextDesc (uint8_t   *pbuf, 
+USBH_DescHeader_t      *USBH_GetNextDesc (uint8_t   *pbuf,
                                                   uint16_t  *ptr);
 /**
   * @}
-  */ 
+  */
 
 #ifdef __cplusplus
 }
@@ -140,15 +140,15 @@ USBH_DescHeader_t      *USBH_GetNextDesc (uint8_t   *pbuf,
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /**
 * @}
-*/ 
+*/
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
 

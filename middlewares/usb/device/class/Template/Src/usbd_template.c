@@ -2,25 +2,25 @@
   ******************************************************************************
   * @file    usbd_template.c
   * @author  MCD Application Team
-  * @version V2.4.1
-  * @date    19-June-2015
+  * @version V2.4.2
+  * @date    11-December-2015
   * @brief   This file provides the HID core functions.
   *
   * @verbatim
-  *      
-  *          ===================================================================      
+  *
+  *          ===================================================================
   *                                TEMPLATE Class  Description
   *          ===================================================================
-  *          
   *
   *
   *
-  *           
-  *      
+  *
+  *
+  *
   * @note     In HS mode and when the DMA is used, all variables and data structures
   *           dealing with the DMA during the transaction process should be 32-bit aligned.
-  *           
-  *      
+  *
+  *
   *  @endverbatim
   *
   ******************************************************************************
@@ -34,14 +34,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "usbd_template.h"
@@ -54,35 +54,35 @@
   */
 
 
-/** @defgroup USBD_TEMPLATE 
+/** @defgroup USBD_TEMPLATE
   * @brief usbd core module
   * @{
-  */ 
+  */
 
 /** @defgroup USBD_TEMPLATE_Private_TypesDefinitions
   * @{
-  */ 
+  */
 /**
   * @}
-  */ 
+  */
 
 
 /** @defgroup USBD_TEMPLATE_Private_Defines
   * @{
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 
 /** @defgroup USBD_TEMPLATE_Private_Macros
   * @{
-  */ 
-                                         
+  */
+
 /**
   * @}
-  */ 
+  */
 
 
 
@@ -92,13 +92,13 @@
   */
 
 
-static uint8_t  USBD_TEMPLATE_Init (USBD_HandleTypeDef *pdev, 
+static uint8_t  USBD_TEMPLATE_Init (USBD_HandleTypeDef *pdev,
                                uint8_t cfgidx);
 
-static uint8_t  USBD_TEMPLATE_DeInit (USBD_HandleTypeDef *pdev, 
+static uint8_t  USBD_TEMPLATE_DeInit (USBD_HandleTypeDef *pdev,
                                  uint8_t cfgidx);
 
-static uint8_t  USBD_TEMPLATE_Setup (USBD_HandleTypeDef *pdev, 
+static uint8_t  USBD_TEMPLATE_Setup (USBD_HandleTypeDef *pdev,
                                 USBD_SetupReqTypedef *req);
 
 static uint8_t  *USBD_TEMPLATE_GetCfgDesc (uint16_t *length);
@@ -121,32 +121,32 @@ static uint8_t  USBD_TEMPLATE_IsoOutIncomplete (USBD_HandleTypeDef *pdev, uint8_
 
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup USBD_TEMPLATE_Private_Variables
   * @{
-  */ 
+  */
 
-USBD_ClassTypeDef  USBD_TEMPLATE_ClassDriver = 
+USBD_ClassTypeDef  USBD_TEMPLATE_ClassDriver =
 {
   USBD_TEMPLATE_Init,
   USBD_TEMPLATE_DeInit,
   USBD_TEMPLATE_Setup,
-  USBD_TEMPLATE_EP0_TxReady,  
+  USBD_TEMPLATE_EP0_TxReady,
   USBD_TEMPLATE_EP0_RxReady,
   USBD_TEMPLATE_DataIn,
   USBD_TEMPLATE_DataOut,
   USBD_TEMPLATE_SOF,
   USBD_TEMPLATE_IsoINIncomplete,
-  USBD_TEMPLATE_IsoOutIncomplete,      
+  USBD_TEMPLATE_IsoOutIncomplete,
   USBD_TEMPLATE_GetCfgDesc,
-  USBD_TEMPLATE_GetCfgDesc, 
+  USBD_TEMPLATE_GetCfgDesc,
   USBD_TEMPLATE_GetCfgDesc,
   USBD_TEMPLATE_GetDeviceQualifierDesc,
 };
 
 #if defined ( __ICCARM__ ) /*!< IAR Compiler */
-  #pragma data_alignment=4   
+  #pragma data_alignment=4
 #endif
 /* USB TEMPLATE device Configuration Descriptor */
 static uint8_t USBD_TEMPLATE_CfgDesc[USB_TEMPLATE_CONFIG_DESC_SIZ] =
@@ -162,13 +162,13 @@ static uint8_t USBD_TEMPLATE_CfgDesc[USB_TEMPLATE_CONFIG_DESC_SIZ] =
   0xC0,         /*bmAttributes: bus powered and Supports Remote Wakeup */
   0x32,         /*MaxPower 100 mA: this current is used for detecting Vbus*/
   /* 09 */
-  
-  /**********  Descriptor of TEMPLATE interface 0 Alternate setting 0 **************/  
- 
+
+  /**********  Descriptor of TEMPLATE interface 0 Alternate setting 0 **************/
+
 };
-  
+
 #if defined ( __ICCARM__ ) /*!< IAR Compiler */
-  #pragma data_alignment=4   
+  #pragma data_alignment=4
 #endif
 /* USB Standard Device Descriptor */
 static uint8_t USBD_TEMPLATE_DeviceQualifierDesc[USB_LEN_DEV_QUALIFIER_DESC] =
@@ -187,11 +187,11 @@ static uint8_t USBD_TEMPLATE_DeviceQualifierDesc[USB_LEN_DEV_QUALIFIER_DESC] =
 
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup USBD_TEMPLATE_Private_Functions
   * @{
-  */ 
+  */
 
 /**
   * @brief  USBD_TEMPLATE_Init
@@ -200,11 +200,11 @@ static uint8_t USBD_TEMPLATE_DeviceQualifierDesc[USB_LEN_DEV_QUALIFIER_DESC] =
   * @param  cfgidx: Configuration index
   * @retval status
   */
-static uint8_t  USBD_TEMPLATE_Init (USBD_HandleTypeDef *pdev, 
+static uint8_t  USBD_TEMPLATE_Init (USBD_HandleTypeDef *pdev,
                                uint8_t cfgidx)
 {
   uint8_t ret = 0;
-  
+
 
   return ret;
 }
@@ -216,7 +216,7 @@ static uint8_t  USBD_TEMPLATE_Init (USBD_HandleTypeDef *pdev,
   * @param  cfgidx: Configuration index
   * @retval status
   */
-static uint8_t  USBD_TEMPLATE_DeInit (USBD_HandleTypeDef *pdev, 
+static uint8_t  USBD_TEMPLATE_DeInit (USBD_HandleTypeDef *pdev,
                                  uint8_t cfgidx)
 {
 
@@ -230,29 +230,29 @@ static uint8_t  USBD_TEMPLATE_DeInit (USBD_HandleTypeDef *pdev,
   * @param  req: usb requests
   * @retval status
   */
-static uint8_t  USBD_TEMPLATE_Setup (USBD_HandleTypeDef *pdev, 
+static uint8_t  USBD_TEMPLATE_Setup (USBD_HandleTypeDef *pdev,
                                 USBD_SetupReqTypedef *req)
 {
- 
+
   switch (req->bmRequest & USB_REQ_TYPE_MASK)
   {
-  case USB_REQ_TYPE_CLASS :  
+  case USB_REQ_TYPE_CLASS :
     switch (req->bRequest)
     {
-      
+
     default:
       USBD_CtlError (pdev, req);
-      return USBD_FAIL; 
+      return USBD_FAIL;
     }
     break;
-    
+
   case USB_REQ_TYPE_STANDARD:
     switch (req->bRequest)
     {
-    
+
     default:
       USBD_CtlError (pdev, req);
-      return USBD_FAIL;     
+      return USBD_FAIL;
     }
   }
   return USBD_OK;
@@ -260,7 +260,7 @@ static uint8_t  USBD_TEMPLATE_Setup (USBD_HandleTypeDef *pdev,
 
 
 /**
-  * @brief  USBD_TEMPLATE_GetCfgDesc 
+  * @brief  USBD_TEMPLATE_GetCfgDesc
   *         return configuration descriptor
   * @param  length : pointer data length
   * @retval pointer to descriptor buffer
@@ -272,7 +272,7 @@ static uint8_t  *USBD_TEMPLATE_GetCfgDesc (uint16_t *length)
 }
 
 /**
-* @brief  DeviceQualifierDescriptor 
+* @brief  DeviceQualifierDescriptor
 *         return Device Qualifier descriptor
 * @param  length : pointer data length
 * @retval pointer to descriptor buffer
@@ -291,7 +291,7 @@ uint8_t  *USBD_TEMPLATE_DeviceQualifierDescriptor (uint16_t *length)
   * @param  epnum: endpoint index
   * @retval status
   */
-static uint8_t  USBD_TEMPLATE_DataIn (USBD_HandleTypeDef *pdev, 
+static uint8_t  USBD_TEMPLATE_DataIn (USBD_HandleTypeDef *pdev,
                               uint8_t epnum)
 {
 
@@ -362,7 +362,7 @@ static uint8_t  USBD_TEMPLATE_IsoOutIncomplete (USBD_HandleTypeDef *pdev, uint8_
   * @param  epnum: endpoint index
   * @retval status
   */
-static uint8_t  USBD_TEMPLATE_DataOut (USBD_HandleTypeDef *pdev, 
+static uint8_t  USBD_TEMPLATE_DataOut (USBD_HandleTypeDef *pdev,
                               uint8_t epnum)
 {
 
@@ -370,7 +370,7 @@ static uint8_t  USBD_TEMPLATE_DataOut (USBD_HandleTypeDef *pdev,
 }
 
 /**
-* @brief  DeviceQualifierDescriptor 
+* @brief  DeviceQualifierDescriptor
 *         return Device Qualifier descriptor
 * @param  length : pointer data length
 * @retval pointer to descriptor buffer
@@ -383,16 +383,16 @@ uint8_t  *USBD_TEMPLATE_GetDeviceQualifierDesc (uint16_t *length)
 
 /**
   * @}
-  */ 
+  */
 
 
 /**
   * @}
-  */ 
+  */
 
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

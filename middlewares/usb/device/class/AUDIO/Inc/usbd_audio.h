@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    usbd_audio.h
   * @author  MCD Application Team
-  * @version V2.4.1
-  * @date    19-June-2015
+  * @version V2.4.2
+  * @date    11-December-2015
   * @brief   header file for the usbd_audio.c file.
   ******************************************************************************
   * @attention
@@ -16,15 +16,15 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
   */
- 
+
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __USB_AUDIO_H
 #define __USB_AUDIO_H
@@ -39,16 +39,16 @@
 /** @addtogroup STM32_USB_DEVICE_LIBRARY
   * @{
   */
-  
+
 /** @defgroup USBD_AUDIO
   * @brief This file is the Header file for usbd_audio.c
   * @{
-  */ 
+  */
 
 
 /** @defgroup USBD_AUDIO_Exported_Defines
   * @{
-  */ 
+  */
 #define AUDIO_OUT_EP                                  0x01
 #define USB_AUDIO_CONFIG_DESC_SIZ                     109
 #define AUDIO_INTERFACE_DESC_SIZE                     9
@@ -91,15 +91,15 @@
 #define AUDIO_OUT_STREAMING_CTRL                      0x02
 
 
-#define AUDIO_OUT_PACKET                              (uint32_t)(((USBD_AUDIO_FREQ * 2 * 2) /1000)) 
+#define AUDIO_OUT_PACKET                              (uint32_t)(((USBD_AUDIO_FREQ * 2 * 2) /1000))
 #define AUDIO_DEFAULT_VOLUME                          70
-    
+
 /* Number of sub-packets in the audio transfer buffer. You can modify this value but always make sure
   that it is an even number and higher than 3 */
 #define AUDIO_OUT_PACKET_NUM                          80
 /* Total size of the audio transfer buffer */
 #define AUDIO_TOTAL_BUF_SIZE                          ((uint32_t)(AUDIO_OUT_PACKET * AUDIO_OUT_PACKET_NUM))
-    
+
     /* Audio Commands enumeration */
 typedef enum
 {
@@ -113,13 +113,13 @@ typedef enum
 {
   AUDIO_OFFSET_NONE = 0,
   AUDIO_OFFSET_HALF,
-  AUDIO_OFFSET_FULL,  
-  AUDIO_OFFSET_UNKNOWN,    
+  AUDIO_OFFSET_FULL,
+  AUDIO_OFFSET_UNKNOWN,
 }
 AUDIO_OffsetTypeDef;
 /**
   * @}
-  */ 
+  */
 
 
 /** @defgroup USBD_CORE_Exported_TypesDefinitions
@@ -127,26 +127,26 @@ AUDIO_OffsetTypeDef;
   */
  typedef struct
 {
-   uint8_t cmd;   
-   uint8_t data[USB_MAX_EP0_SIZE];  
-   uint8_t len;  
-   uint8_t unit;    
+   uint8_t cmd;
+   uint8_t data[USB_MAX_EP0_SIZE];
+   uint8_t len;
+   uint8_t unit;
 }
-USBD_AUDIO_ControlTypeDef; 
+USBD_AUDIO_ControlTypeDef;
 
 
 
 typedef struct
 {
-  __IO uint32_t             alt_setting; 
+  __IO uint32_t             alt_setting;
   uint8_t                   buffer[AUDIO_TOTAL_BUF_SIZE];
   AUDIO_OffsetTypeDef       offset;
-  uint8_t                    rd_enable;  
-  uint16_t                   rd_ptr;  
-  uint16_t                   wr_ptr;  
-  USBD_AUDIO_ControlTypeDef control;   
+  uint8_t                    rd_enable;
+  uint16_t                   rd_ptr;
+  uint16_t                   wr_ptr;
+  USBD_AUDIO_ControlTypeDef control;
 }
-USBD_AUDIO_HandleTypeDef; 
+USBD_AUDIO_HandleTypeDef;
 
 
 typedef struct
@@ -161,38 +161,38 @@ typedef struct
 }USBD_AUDIO_ItfTypeDef;
 /**
   * @}
-  */ 
+  */
 
 
 
 /** @defgroup USBD_CORE_Exported_Macros
   * @{
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup USBD_CORE_Exported_Variables
   * @{
-  */ 
+  */
 
 extern USBD_ClassTypeDef  USBD_AUDIO;
 #define USBD_AUDIO_CLASS    &USBD_AUDIO
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup USB_CORE_Exported_Functions
   * @{
-  */ 
-uint8_t  USBD_AUDIO_RegisterInterface  (USBD_HandleTypeDef   *pdev, 
+  */
+uint8_t  USBD_AUDIO_RegisterInterface  (USBD_HandleTypeDef   *pdev,
                                         USBD_AUDIO_ItfTypeDef *fops);
 
 void  USBD_AUDIO_Sync (USBD_HandleTypeDef *pdev, AUDIO_OffsetTypeDef offset);
 /**
   * @}
-  */ 
+  */
 
 #ifdef __cplusplus
 }
@@ -201,10 +201,10 @@ void  USBD_AUDIO_Sync (USBD_HandleTypeDef *pdev, AUDIO_OffsetTypeDef offset);
 #endif  /* __USB_AUDIO_H */
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
-  
+  */
+
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

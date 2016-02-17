@@ -16,14 +16,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Define to prevent recursive  ----------------------------------------------*/
 #ifndef __USBH_CDC_H
@@ -52,7 +52,7 @@
 /** @defgroup USBH_CDC_CORE
 * @brief This file is the Header file for usbh_core.c
 * @{
-*/ 
+*/
 
 
 
@@ -69,7 +69,7 @@
 #define DIRECT_LINE_CONTROL_MODEL                               0x01
 #define ABSTRACT_CONTROL_MODEL                                  0x02
 #define TELEPHONE_CONTROL_MODEL                                 0x03
-#define MULTICHANNEL_CONTROL_MODEL                              0x04   
+#define MULTICHANNEL_CONTROL_MODEL                              0x04
 #define CAPI_CONTROL_MODEL                                      0x05
 #define ETHERNET_NETWORKING_CONTROL_MODEL                       0x06
 #define ATM_NETWORKING_CONTROL_MODEL                            0x07
@@ -106,11 +106,11 @@
 #define CDC_SET_RINGER_PARMS                                    0x30
 #define CDC_GET_RINGER_PARMS                                    0x31
 #define CDC_SET_OPERATION_PARMS                                 0x32
-#define CDC_GET_OPERATION_PARMS                                 0x33  
+#define CDC_GET_OPERATION_PARMS                                 0x33
 #define CDC_SET_LINE_PARMS                                      0x34
 #define CDC_GET_LINE_PARMS                                      0x35
 #define CDC_DIAL_DIGITS                                         0x36
-#define CDC_SET_UNIT_PARAMETER                                  0x37  
+#define CDC_SET_UNIT_PARAMETER                                  0x37
 #define CDC_GET_UNIT_PARAMETER                                  0x38
 #define CDC_CLEAR_UNIT_PARAMETER                                0x39
 #define CDC_GET_PROFILE                                         0x3A
@@ -121,7 +121,7 @@
 #define CDC_SET_ETHERNET_PACKET_FILTER                          0x43
 #define CDC_GET_ETHERNET_STATISTIC                              0x44
 
-#define CDC_SET_ATM_DATA_FORMAT                                 0x50  
+#define CDC_SET_ATM_DATA_FORMAT                                 0x50
 #define CDC_GET_ATM_DEVICE_STATISTICS                           0x51
 #define CDC_SET_ATM_DEFAULT_VC                                  0x52
 #define CDC_GET_ATM_VC_STATISTICS                               0x53
@@ -136,11 +136,11 @@
 #define LINE_CODING_STRUCTURE_SIZE                              0x07
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup USBH_CDC_CORE_Exported_Types
 * @{
-*/ 
+*/
 
 /* States for CDC State Machine */
 typedef enum
@@ -149,17 +149,17 @@ typedef enum
   CDC_SEND_DATA,
   CDC_SEND_DATA_WAIT,
   CDC_RECEIVE_DATA,
-  CDC_RECEIVE_DATA_WAIT,  
+  CDC_RECEIVE_DATA_WAIT,
 }
 CDC_DataStateTypeDef;
 
 typedef enum
 {
   CDC_IDLE_STATE= 0,
-  CDC_SET_LINE_CODING_STATE,  
-  CDC_GET_LAST_LINE_CODING_STATE,    
-  CDC_TRANSFER_DATA, 
-  CDC_ERROR_STATE,  
+  CDC_SET_LINE_CODING_STATE,
+  CDC_GET_LAST_LINE_CODING_STATE,
+  CDC_TRANSFER_DATA,
+  CDC_ERROR_STATE,
 }
 CDC_StateTypeDef;
 
@@ -168,10 +168,10 @@ CDC_StateTypeDef;
 typedef union _CDC_LineCodingStructure
 {
   uint8_t Array[LINE_CODING_STRUCTURE_SIZE];
-  
+
   struct
   {
-    
+
     uint32_t             dwDTERate;     /*Data terminal rate, in bits per second*/
     uint8_t              bCharFormat;   /*Stop bits
     0 - 1 Stop bit
@@ -192,16 +192,16 @@ CDC_LineCodingTypeDef;
 
 /* Header Functional Descriptor
 --------------------------------------------------------------------------------
-Offset|  field              | Size  |    Value   |   Description                    
+Offset|  field              | Size  |    Value   |   Description
 ------|---------------------|-------|------------|------------------------------
 0     |  bFunctionLength    | 1     |   number   |  Size of this descriptor.
 1     |  bDescriptorType    | 1     |   Constant |  CS_INTERFACE (0x24)
-2     |  bDescriptorSubtype | 1     |   Constant |  Identifier (ID) of functional 
+2     |  bDescriptorSubtype | 1     |   Constant |  Identifier (ID) of functional
       |                     |       |            | descriptor.
 3     |  bcdCDC             | 2     |            |
-      |                     |       |   Number   | USB Class Definitions for 
-      |                     |       |            | Communication Devices Specification 
-      |                     |       |            | release number in binary-coded 
+      |                     |       |   Number   | USB Class Definitions for
+      |                     |       |            | Communication Devices Specification
+      |                     |       |            | release number in binary-coded
       |                     |       |            | decimal
 ------|---------------------|-------|------------|------------------------------
 */
@@ -217,11 +217,11 @@ typedef struct _FunctionalDescriptorHeader
 CDC_HeaderFuncDesc_TypeDef;
 /* Call Management Functional Descriptor
 --------------------------------------------------------------------------------
-Offset|  field              | Size  |    Value   |   Description                    
+Offset|  field              | Size  |    Value   |   Description
 ------|---------------------|-------|------------|------------------------------
 0     |  bFunctionLength    | 1     |   number   |  Size of this descriptor.
 1     |  bDescriptorType    | 1     |   Constant |  CS_INTERFACE (0x24)
-2     |  bDescriptorSubtype | 1     |   Constant |  Call Management functional 
+2     |  bDescriptorSubtype | 1     |   Constant |  Call Management functional
       |                     |       |            |  descriptor subtype.
 3     |  bmCapabilities     | 1     |   Bitmap   | The capabilities that this configuration
       |                     |       |            | supports:
@@ -243,7 +243,7 @@ Offset|  field              | Size  |    Value   |   Description
       |                     |       |            | ignored. In this case, bit D1 is reset to zero for
       |                     |       |            | future compatibility.
 4     | bDataInterface      | 1     | Number     | Interface number of Data Class interface
-      |                     |       |            | optionally used for call management.        
+      |                     |       |            | optionally used for call management.
 ------|---------------------|-------|------------|------------------------------
 */
 typedef struct _CallMgmtFunctionalDescriptor
@@ -257,11 +257,11 @@ typedef struct _CallMgmtFunctionalDescriptor
 CDC_CallMgmtFuncDesc_TypeDef;
 /* Abstract Control Management Functional Descriptor
 --------------------------------------------------------------------------------
-Offset|  field              | Size  |    Value   |   Description                    
+Offset|  field              | Size  |    Value   |   Description
 ------|---------------------|-------|------------|------------------------------
 0     |  bFunctionLength    | 1     |   number   |  Size of functional descriptor, in bytes.
 1     |  bDescriptorType    | 1     |   Constant |  CS_INTERFACE (0x24)
-2     |  bDescriptorSubtype | 1     |   Constant |  Abstract Control Management 
+2     |  bDescriptorSubtype | 1     |   Constant |  Abstract Control Management
       |                     |       |            |  functional  descriptor subtype.
 3     |  bmCapabilities     | 1     |   Bitmap   | The capabilities that this configuration
       |                     |       |            | supports ((A bit value of zero means that the
@@ -295,16 +295,16 @@ typedef struct _AbstractCntrlMgmtFunctionalDescriptor
 CDC_AbstCntrlMgmtFuncDesc_TypeDef;
 /* Union Functional Descriptor
 --------------------------------------------------------------------------------
-Offset|  field              | Size  |    Value   |   Description                    
+Offset|  field              | Size  |    Value   |   Description
 ------|---------------------|-------|------------|------------------------------
 0     |  bFunctionLength    | 1     |   number   |  Size of this descriptor.
 1     |  bDescriptorType    | 1     |   Constant |  CS_INTERFACE (0x24)
-2     |  bDescriptorSubtype | 1     |   Constant |  Union functional 
+2     |  bDescriptorSubtype | 1     |   Constant |  Union functional
       |                     |       |            |  descriptor subtype.
-3     |  bMasterInterface   | 1     |   Constant | The interface number of the 
+3     |  bMasterInterface   | 1     |   Constant | The interface number of the
       |                     |       |            | Communication or Data Class interface
 4     | bSlaveInterface0    | 1     | Number     | nterface number of first slave or associated
-      |                     |       |            | interface in the union.        
+      |                     |       |            | interface in the union.
 ------|---------------------|-------|------------|------------------------------
 */
 typedef struct _UnionFunctionalDescriptor
@@ -323,7 +323,7 @@ typedef struct _USBH_CDCInterfaceDesc
   CDC_HeaderFuncDesc_TypeDef           CDC_HeaderFuncDesc;
   CDC_CallMgmtFuncDesc_TypeDef         CDC_CallMgmtFuncDesc;
   CDC_AbstCntrlMgmtFuncDesc_TypeDef    CDC_AbstCntrlMgmtFuncDesc;
-  CDC_UnionFuncDesc_TypeDef            CDC_UnionFuncDesc;  
+  CDC_UnionFuncDesc_TypeDef            CDC_UnionFuncDesc;
 }
 CDC_InterfaceDesc_Typedef;
 
@@ -331,7 +331,7 @@ CDC_InterfaceDesc_Typedef;
 /* Structure for CDC process */
 typedef struct
 {
-  uint8_t              NotifPipe; 
+  uint8_t              NotifPipe;
   uint8_t              NotifEp;
   uint8_t              buff[8];
   uint16_t             NotifEpSize;
@@ -340,13 +340,13 @@ CDC_CommItfTypedef ;
 
 typedef struct
 {
-  uint8_t              InPipe; 
+  uint8_t              InPipe;
   uint8_t              OutPipe;
   uint8_t              OutEp;
   uint8_t              InEp;
   uint8_t              buff[8];
   uint16_t             OutEpSize;
-  uint16_t             InEpSize;  
+  uint16_t             InEpSize;
 }
 CDC_DataItfTypedef ;
 
@@ -356,64 +356,64 @@ typedef struct _CDC_Process
   CDC_CommItfTypedef                CommItf;
   CDC_DataItfTypedef                DataItf;
   uint8_t                           *pTxData;
-  uint8_t                           *pRxData; 
+  uint8_t                           *pRxData;
   uint32_t                           TxDataLength;
-  uint32_t                           RxDataLength;  
+  uint32_t                           RxDataLength;
   CDC_InterfaceDesc_Typedef         CDC_Desc;
   CDC_LineCodingTypeDef             LineCoding;
-  CDC_LineCodingTypeDef             *pUserLineCoding;  
+  CDC_LineCodingTypeDef             *pUserLineCoding;
   CDC_StateTypeDef                  state;
   CDC_DataStateTypeDef              data_tx_state;
-  CDC_DataStateTypeDef              data_rx_state; 
+  CDC_DataStateTypeDef              data_rx_state;
   uint8_t                           Rx_Poll;
 }
 CDC_HandleTypeDef;
 
 /**
 * @}
-*/ 
+*/
 
 /** @defgroup USBH_CDC_CORE_Exported_Defines
 * @{
-*/ 
+*/
 
 /**
 * @}
-*/ 
+*/
 
 /** @defgroup USBH_CDC_CORE_Exported_Macros
 * @{
-*/ 
+*/
 /**
 * @}
-*/ 
+*/
 
 /** @defgroup USBH_CDC_CORE_Exported_Variables
 * @{
-*/ 
+*/
 extern USBH_ClassTypeDef  CDC_Class;
 #define USBH_CDC_CLASS    &CDC_Class
 
 /**
 * @}
-*/ 
+*/
 
 /** @defgroup USBH_CDC_CORE_Exported_FunctionsPrototype
 * @{
-*/ 
+*/
 
-USBH_StatusTypeDef  USBH_CDC_SetLineCoding(USBH_HandleTypeDef *phost, 
+USBH_StatusTypeDef  USBH_CDC_SetLineCoding(USBH_HandleTypeDef *phost,
                                            CDC_LineCodingTypeDef *linecoding);
 
-USBH_StatusTypeDef  USBH_CDC_GetLineCoding(USBH_HandleTypeDef *phost, 
+USBH_StatusTypeDef  USBH_CDC_GetLineCoding(USBH_HandleTypeDef *phost,
                                            CDC_LineCodingTypeDef *linecoding);
 
-USBH_StatusTypeDef  USBH_CDC_Transmit(USBH_HandleTypeDef *phost, 
-                                      uint8_t *pbuff, 
+USBH_StatusTypeDef  USBH_CDC_Transmit(USBH_HandleTypeDef *phost,
+                                      uint8_t *pbuff,
                                       uint32_t length);
 
-USBH_StatusTypeDef  USBH_CDC_Receive(USBH_HandleTypeDef *phost, 
-                                     uint8_t *pbuff, 
+USBH_StatusTypeDef  USBH_CDC_Receive(USBH_HandleTypeDef *phost,
+                                     uint8_t *pbuff,
                                      uint32_t length);
 
 
@@ -429,7 +429,7 @@ void USBH_CDC_ReceiveCallback(USBH_HandleTypeDef *phost);
 
 /**
 * @}
-*/ 
+*/
 
 #ifdef __cplusplus
 }
@@ -439,18 +439,18 @@ void USBH_CDC_ReceiveCallback(USBH_HandleTypeDef *phost);
 
 /**
 * @}
-*/ 
+*/
 
 /**
 * @}
-*/ 
+*/
 
 /**
 * @}
-*/ 
+*/
 
 /**
 * @}
-*/ 
+*/
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
 

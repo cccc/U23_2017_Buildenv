@@ -1,4 +1,4 @@
-Taken from /STM32Cube_FW_F4_V1.9.0/Drivers/CMSIS/Device/ST/STM32F4xx/ of STM32F4 Cube distribution
+Taken from /STM32Cube_FW_F4_V1.11.0/Drivers/CMSIS/Device/ST/STM32F4xx/ of STM32F4 Cube distribution
 
 This middleware just adds the proper startup code to your project.
 

@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    stm32f4xx_hal_nand.h
   * @author  MCD Application Team
-  * @version V1.4.1
-  * @date    09-October-2015
+  * @version V1.4.4
+  * @date    22-January-2016
   * @brief   Header file of NAND HAL module.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -60,7 +60,7 @@
 
 /** @addtogroup NAND
   * @{
-  */ 
+  */
 
 #if defined(STM32F405xx) || defined(STM32F415xx) || defined(STM32F407xx) || defined(STM32F417xx) || \
     defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F429xx) || defined(STM32F439xx) || \
@@ -72,25 +72,25 @@
   * @{
   */
 
-/** 
+/**
   * @brief  HAL NAND State structures definition
   */
 typedef enum
 {
-  HAL_NAND_STATE_RESET     = 0x00,  /*!< NAND not yet initialized or disabled */
-  HAL_NAND_STATE_READY     = 0x01,  /*!< NAND initialized and ready for use   */
-  HAL_NAND_STATE_BUSY      = 0x02,  /*!< NAND internal process is ongoing     */
-  HAL_NAND_STATE_ERROR     = 0x03   /*!< NAND error state                     */
+  HAL_NAND_STATE_RESET     = 0x00U,  /*!< NAND not yet initialized or disabled */
+  HAL_NAND_STATE_READY     = 0x01U,  /*!< NAND initialized and ready for use   */
+  HAL_NAND_STATE_BUSY      = 0x02U,  /*!< NAND internal process is ongoing     */
+  HAL_NAND_STATE_ERROR     = 0x03U   /*!< NAND error state                     */
 }HAL_NAND_StateTypeDef;
-   
-/** 
+
+/**
   * @brief  NAND Memory electronic signature Structure definition
   */
 typedef struct
 {
   /*<! NAND memory electronic signature maker and device IDs */
 
-  uint8_t Maker_Id; 
+  uint8_t Maker_Id;
 
   uint8_t Device_Id;
 
@@ -99,10 +99,10 @@ typedef struct
   uint8_t Fourth_Id;
 }NAND_IDTypeDef;
 
-/** 
+/**
   * @brief  NAND Memory address Structure definition
   */
-typedef struct 
+typedef struct
 {
   uint16_t Page;   /*!< NAND memory Page address  */
 
@@ -112,9 +112,9 @@ typedef struct
 
 }NAND_AddressTypeDef;
 
-/** 
+/**
   * @brief  NAND Memory info Structure definition
-  */ 
+  */
 typedef struct
 {
   uint32_t PageSize;       /*!< NAND memory page (without spare area) size measured in K. bytes */
@@ -128,13 +128,13 @@ typedef struct
   uint32_t ZoneSize;       /*!< NAND memory zone size measured in number of blocks              */
 }NAND_InfoTypeDef;
 
-/** 
+/**
   * @brief  NAND handle Structure definition
-  */   
+  */
 typedef struct
 {
   FMC_NAND_TypeDef             *Instance;  /*!< Register base address                        */
-  
+
   FMC_NAND_InitTypeDef         Init;       /*!< NAND device control configuration parameters */
 
   HAL_LockTypeDef              Lock;       /*!< NAND locking object                          */
@@ -151,7 +151,7 @@ typedef struct
 /* Exported macros ------------------------------------------------------------*/
 /** @defgroup NAND_Exported_Macros NAND Exported Macros
  * @{
- */ 
+ */
 
 /** @brief Reset NAND handle state
   * @param  __HANDLE__: specifies the NAND handle.
@@ -167,8 +167,8 @@ typedef struct
 /** @addtogroup NAND_Exported_Functions NAND Exported Functions
   * @{
   */
-    
-/** @addtogroup NAND_Exported_Functions_Group1 Initialization and de-initialization functions 
+
+/** @addtogroup NAND_Exported_Functions_Group1 Initialization and de-initialization functions
   * @{
   */
 
@@ -183,8 +183,8 @@ void        HAL_NAND_ITCallback(NAND_HandleTypeDef *hnand);
 /**
   * @}
   */
-  
-/** @addtogroup NAND_Exported_Functions_Group2 Input and Output functions 
+
+/** @addtogroup NAND_Exported_Functions_Group2 Input and Output functions
   * @{
   */
 
@@ -203,7 +203,7 @@ uint32_t           HAL_NAND_Address_Inc(NAND_HandleTypeDef *hnand, NAND_AddressT
   * @}
   */
 
-/** @addtogroup NAND_Exported_Functions_Group3 Peripheral Control functions 
+/** @addtogroup NAND_Exported_Functions_Group3 Peripheral Control functions
   * @{
   */
 
@@ -215,8 +215,8 @@ HAL_StatusTypeDef  HAL_NAND_GetECC(NAND_HandleTypeDef *hnand, uint32_t *ECCval, 
 /**
   * @}
   */
-    
-/** @addtogroup NAND_Exported_Functions_Group4 Peripheral State functions 
+
+/** @addtogroup NAND_Exported_Functions_Group4 Peripheral State functions
   * @{
   */
 /* NAND State functions *******************************************************/
@@ -229,41 +229,41 @@ uint32_t              HAL_NAND_Read_Status(NAND_HandleTypeDef *hnand);
 /**
   * @}
   */
-    
+
 /* Private types -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 /* Private constants ---------------------------------------------------------*/
 /** @defgroup NAND_Private_Constants NAND Private Constants
   * @{
   */
-#define NAND_DEVICE1               ((uint32_t)0x70000000) 
-#define NAND_DEVICE2               ((uint32_t)0x80000000) 
-#define NAND_WRITE_TIMEOUT         ((uint32_t)0x01000000)
+#define NAND_DEVICE1               ((uint32_t)0x70000000U)
+#define NAND_DEVICE2               ((uint32_t)0x80000000U)
+#define NAND_WRITE_TIMEOUT         ((uint32_t)0x01000000U)
 
-#define CMD_AREA                   ((uint32_t)(1<<16))  /* A16 = CLE high */
-#define ADDR_AREA                  ((uint32_t)(1<<17))  /* A17 = ALE high */
+#define CMD_AREA                   ((uint32_t)(1U<<16U))  /* A16 = CLE high */
+#define ADDR_AREA                  ((uint32_t)(1U<<17U))  /* A17 = ALE high */
 
-#define NAND_CMD_AREA_A            ((uint8_t)0x00)
-#define NAND_CMD_AREA_B            ((uint8_t)0x01)
-#define NAND_CMD_AREA_C            ((uint8_t)0x50)
-#define NAND_CMD_AREA_TRUE1        ((uint8_t)0x30)
+#define NAND_CMD_AREA_A            ((uint8_t)0x00U)
+#define NAND_CMD_AREA_B            ((uint8_t)0x01U)
+#define NAND_CMD_AREA_C            ((uint8_t)0x50U)
+#define NAND_CMD_AREA_TRUE1        ((uint8_t)0x30U)
 
-#define NAND_CMD_WRITE0            ((uint8_t)0x80)
-#define NAND_CMD_WRITE_TRUE1       ((uint8_t)0x10)
-#define NAND_CMD_ERASE0            ((uint8_t)0x60)
-#define NAND_CMD_ERASE1            ((uint8_t)0xD0)  
-#define NAND_CMD_READID            ((uint8_t)0x90)
-#define NAND_CMD_STATUS            ((uint8_t)0x70)
-#define NAND_CMD_LOCK_STATUS       ((uint8_t)0x7A)
-#define NAND_CMD_RESET             ((uint8_t)0xFF)
+#define NAND_CMD_WRITE0            ((uint8_t)0x80U)
+#define NAND_CMD_WRITE_TRUE1       ((uint8_t)0x10U)
+#define NAND_CMD_ERASE0            ((uint8_t)0x60U)
+#define NAND_CMD_ERASE1            ((uint8_t)0xD0U)
+#define NAND_CMD_READID            ((uint8_t)0x90U)
+#define NAND_CMD_STATUS            ((uint8_t)0x70U)
+#define NAND_CMD_LOCK_STATUS       ((uint8_t)0x7AU)
+#define NAND_CMD_RESET             ((uint8_t)0xFFU)
 
 /* NAND memory status */
-#define NAND_VALID_ADDRESS         ((uint32_t)0x00000100)
-#define NAND_INVALID_ADDRESS       ((uint32_t)0x00000200)
-#define NAND_TIMEOUT_ERROR         ((uint32_t)0x00000400)
-#define NAND_BUSY                  ((uint32_t)0x00000000)
-#define NAND_ERROR                 ((uint32_t)0x00000001)
-#define NAND_READY                 ((uint32_t)0x00000040)
+#define NAND_VALID_ADDRESS         ((uint32_t)0x00000100U)
+#define NAND_INVALID_ADDRESS       ((uint32_t)0x00000200U)
+#define NAND_TIMEOUT_ERROR         ((uint32_t)0x00000400U)
+#define NAND_BUSY                  ((uint32_t)0x00000000U)
+#define NAND_ERROR                 ((uint32_t)0x00000001U)
+#define NAND_READY                 ((uint32_t)0x00000040U)
 /**
   * @}
   */
@@ -287,27 +287,27 @@ uint32_t              HAL_NAND_Read_Status(NAND_HandleTypeDef *hnand);
   * @param  __ADDRESS__: NAND memory address.
   * @retval NAND address cycling value.
   */
-#define ADDR_1ST_CYCLE(__ADDRESS__)       (uint8_t)(__ADDRESS__)              /* 1st addressing cycle */
-#define ADDR_2ND_CYCLE(__ADDRESS__)       (uint8_t)((__ADDRESS__) >> 8)       /* 2nd addressing cycle */
-#define ADDR_3RD_CYCLE(__ADDRESS__)       (uint8_t)((__ADDRESS__) >> 16)      /* 3rd addressing cycle */
-#define ADDR_4TH_CYCLE(__ADDRESS__)       (uint8_t)((__ADDRESS__) >> 24)      /* 4th addressing cycle */
+#define ADDR_1ST_CYCLE(__ADDRESS__)       (uint8_t)(__ADDRESS__)               /* 1st addressing cycle */
+#define ADDR_2ND_CYCLE(__ADDRESS__)       (uint8_t)((__ADDRESS__) >> 8U)       /* 2nd addressing cycle */
+#define ADDR_3RD_CYCLE(__ADDRESS__)       (uint8_t)((__ADDRESS__) >> 16U)      /* 3rd addressing cycle */
+#define ADDR_4TH_CYCLE(__ADDRESS__)       (uint8_t)((__ADDRESS__) >> 24U)      /* 4th addressing cycle */
 /**
   * @}
   */
 #endif /* STM32F405xx || STM32F415xx || STM32F407xx || STM32F417xx ||\
           STM32F427xx || STM32F437xx || STM32F429xx || STM32F439xx ||\
           STM32F446xx || STM32F469xx || STM32F479xx */
-    
+
 /**
   * @}
   */
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 #ifdef __cplusplus
 }

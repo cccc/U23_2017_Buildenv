@@ -16,14 +16,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Define to prevent recursive  ----------------------------------------------*/
 #ifndef __USBH_MSC_SCSI_H
@@ -48,27 +48,27 @@
 /** @addtogroup USBH_MSC_CLASS
   * @{
   */
-  
+
 /** @defgroup USBH_MSC_SCSI
   * @brief This file is the Header file for usbh_msc_scsi.c
   * @{
-  */ 
-    
-    
+  */
+
+
 // Capacity data.
 typedef struct
 {
-  uint32_t block_nbr;   
-  uint16_t block_size;   
+  uint32_t block_nbr;
+  uint16_t block_size;
 } SCSI_CapacityTypeDef;
 
 
 // Sense data.
 typedef struct
 {
-  uint8_t key;   
-  uint8_t asc;   
-  uint8_t ascq;  
+  uint8_t key;
+  uint8_t asc;
+  uint8_t ascq;
 } SCSI_SenseTypeDef;
 
 // INQUIRY data.
@@ -84,25 +84,25 @@ typedef struct
 
 /** @defgroup USBH_MSC_SCSI_Exported_Defines
   * @{
-  */ 
+  */
 #define OPCODE_TEST_UNIT_READY            0x00
 #define OPCODE_READ_CAPACITY10            0x25
 #define OPCODE_READ10                     0x28
 #define OPCODE_WRITE10                    0x2A
 #define OPCODE_REQUEST_SENSE              0x03
-#define OPCODE_INQUIRY                    0x12    
+#define OPCODE_INQUIRY                    0x12
 
 #define DATA_LEN_MODE_TEST_UNIT_READY        0
 #define DATA_LEN_READ_CAPACITY10             8
-#define DATA_LEN_INQUIRY                    36  
-#define DATA_LEN_REQUEST_SENSE              14       
+#define DATA_LEN_INQUIRY                    36
+#define DATA_LEN_REQUEST_SENSE              14
 
 #define CBW_CB_LENGTH                       16
-#define CBW_LENGTH                          10    
+#define CBW_LENGTH                          10
 
 /** @defgroup USBH_MSC_SCSI_Exported_Defines
   * @{
-  */ 
+  */
 #define SCSI_SENSE_KEY_NO_SENSE                          0x00
 #define SCSI_SENSE_KEY_RECOVERED_ERROR                   0x01
 #define SCSI_SENSE_KEY_NOT_READY                         0x02
@@ -119,12 +119,12 @@ typedef struct
 #define SCSI_SENSE_KEY_MISCOMPARE                        0x0E
 /**
   * @}
-  */ 
-    
-    
+  */
+
+
 /** @defgroup USBH_MSC_SCSI_Exported_Defines
   * @{
-  */     
+  */
 #define SCSI_ASC_NO_ADDITIONAL_SENSE_INFORMATION         0x00
 #define SCSI_ASC_LOGICAL_UNIT_NOT_READY                  0x04
 #define SCSI_ASC_INVALID_FIELD_IN_CDB                    0x24
@@ -135,51 +135,51 @@ typedef struct
 #define SCSI_ASC_MEDIUM_NOT_PRESENT                      0x3A
 /**
   * @}
-  */ 
-    
-    
+  */
+
+
 /** @defgroup USBH_MSC_SCSI_Exported_Defines
   * @{
-  */     
+  */
 #define SCSI_ASCQ_FORMAT_COMMAND_FAILED                  0x01
 #define SCSI_ASCQ_INITIALIZING_COMMAND_REQUIRED          0x02
 #define SCSI_ASCQ_OPERATION_IN_PROGRESS                  0x07
-    
+
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup USBH_MSC_SCSI_Exported_Macros
   * @{
-  */ 
+  */
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup _Exported_Variables
   * @{
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup USBH_MSC_SCSI_Exported_FunctionsPrototype
   * @{
-  */ 
-USBH_StatusTypeDef USBH_MSC_SCSI_TestUnitReady (USBH_HandleTypeDef *phost, 
+  */
+USBH_StatusTypeDef USBH_MSC_SCSI_TestUnitReady (USBH_HandleTypeDef *phost,
                                                 uint8_t lun);
 
-USBH_StatusTypeDef USBH_MSC_SCSI_ReadCapacity (USBH_HandleTypeDef *phost, 
-                                               uint8_t lun, 
+USBH_StatusTypeDef USBH_MSC_SCSI_ReadCapacity (USBH_HandleTypeDef *phost,
+                                               uint8_t lun,
                                                SCSI_CapacityTypeDef *capacity);
 
-USBH_StatusTypeDef USBH_MSC_SCSI_Inquiry (USBH_HandleTypeDef *phost, 
-                                               uint8_t lun, 
+USBH_StatusTypeDef USBH_MSC_SCSI_Inquiry (USBH_HandleTypeDef *phost,
+                                               uint8_t lun,
                                                SCSI_StdInquiryDataTypeDef *inquiry);
 
-USBH_StatusTypeDef USBH_MSC_SCSI_RequestSense (USBH_HandleTypeDef *phost, 
-                                               uint8_t lun, 
+USBH_StatusTypeDef USBH_MSC_SCSI_RequestSense (USBH_HandleTypeDef *phost,
+                                               uint8_t lun,
                                                SCSI_SenseTypeDef *sense_data);
 
 USBH_StatusTypeDef USBH_MSC_SCSI_Write(USBH_HandleTypeDef *phost,
@@ -197,7 +197,7 @@ USBH_StatusTypeDef USBH_MSC_SCSI_Read(USBH_HandleTypeDef *phost,
 
 /**
   * @}
-  */ 
+  */
 
 #ifdef __cplusplus
 }
@@ -208,15 +208,15 @@ USBH_StatusTypeDef USBH_MSC_SCSI_Read(USBH_HandleTypeDef *phost,
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}

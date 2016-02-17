@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    usbd_dfu_media_template.c
   * @author  MCD Application Team
-  * @version V2.4.1
-  * @date    19-June-2015
+  * @version V2.4.2
+  * @date    11-December-2015
   * @brief   Memory management layer
   ******************************************************************************
   * @attention
@@ -16,14 +16,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 
 /* Includes ------------------------------------------------------------------*/
@@ -53,7 +53,7 @@ USBD_DFU_MediaTypeDef USBD_DFU_MEDIA_Template_fops =
     MEM_If_Write,
     MEM_If_Read,
     MEM_If_GetStatus,
-  
+
 };
 /**
   * @brief  MEM_If_Init
@@ -62,7 +62,7 @@ USBD_DFU_MediaTypeDef USBD_DFU_MEDIA_Template_fops =
   * @retval 0 if operation is successful, MAL_FAIL else.
   */
 uint16_t MEM_If_Init(void)
-{ 
+{
   return 0;
 }
 
@@ -73,7 +73,7 @@ uint16_t MEM_If_Init(void)
   * @retval 0 if operation is successful, MAL_FAIL else.
   */
 uint16_t MEM_If_DeInit(void)
-{ 
+{
   return 0;
 }
 
@@ -110,7 +110,7 @@ uint16_t MEM_If_Write(uint8_t *src, uint8_t *dest, uint32_t Len)
 uint8_t *MEM_If_Read (uint8_t *src, uint8_t *dest, uint32_t Len)
 {
   /* Return a valid address to avoid HardFault */
-  return  (uint8_t*)(0); 
+  return  (uint8_t*)(0);
 }
 
 /**
@@ -127,13 +127,13 @@ uint16_t MEM_If_GetStatus (uint32_t Add, uint8_t Cmd, uint8_t *buffer)
   case DFU_MEDIA_PROGRAM:
 
     break;
-    
+
   case DFU_MEDIA_ERASE:
   default:
 
     break;
-  }                             
-  return  (0); 
+  }
+  return  (0);
 }
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
 

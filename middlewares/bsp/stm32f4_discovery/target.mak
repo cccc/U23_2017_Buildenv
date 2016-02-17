@@ -1,7 +1,7 @@
 TARGET = stm32f4_discovery_bsp
 
 # List C source files here.
-CCSOURCES = stm32f4_discovery.c stm32f4_discovery_accelerometer.c lis302dl.c
+CCSOURCES = stm32f4_discovery.c stm32f4_discovery_accelerometer.c lis302dl.c lis3dsh.c
 
 # List C++ source files here.
 CXXSOURCES =

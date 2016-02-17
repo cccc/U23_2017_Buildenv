@@ -16,14 +16,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Define to prevent recursive  ----------------------------------------------*/
 #ifndef __USBH_MSC_BOT_H
@@ -48,17 +48,17 @@
 /** @addtogroup USBH_MSC_CLASS
   * @{
   */
-  
+
 /** @defgroup USBH_MSC_BOT
   * @brief This file is the Header file for usbh_msc_bot.c
   * @{
-  */ 
+  */
 
 
 /** @defgroup USBH_MSC_BOT_Exported_Types
   * @{
-  */ 
-    
+  */
+
 typedef enum {
   BOT_OK          = 0,
   BOT_FAIL        = 1,
@@ -71,35 +71,35 @@ typedef enum {
   BOT_CMD_IDLE  = 0,
   BOT_CMD_SEND,
   BOT_CMD_WAIT,
-} 
-BOT_CMDStateTypeDef;  
+}
+BOT_CMDStateTypeDef;
 
 /* CSW Status Definitions */
-typedef enum 
+typedef enum
 {
 
    BOT_CSW_CMD_PASSED   =        0x00,
    BOT_CSW_CMD_FAILED   =        0x01,
    BOT_CSW_PHASE_ERROR  =        0x02,
-} 
-BOT_CSWStatusTypeDef;  
+}
+BOT_CSWStatusTypeDef;
 
 typedef enum {
   BOT_SEND_CBW  = 1,
-  BOT_SEND_CBW_WAIT,         
-  BOT_DATA_IN,    
-  BOT_DATA_IN_WAIT,    
-  BOT_DATA_OUT, 
-  BOT_DATA_OUT_WAIT,     
+  BOT_SEND_CBW_WAIT,
+  BOT_DATA_IN,
+  BOT_DATA_IN_WAIT,
+  BOT_DATA_OUT,
+  BOT_DATA_OUT_WAIT,
   BOT_RECEIVE_CSW,
-  BOT_RECEIVE_CSW_WAIT,       
-  BOT_ERROR_IN,         
-  BOT_ERROR_OUT, 
+  BOT_RECEIVE_CSW_WAIT,
+  BOT_ERROR_IN,
+  BOT_ERROR_OUT,
   BOT_UNRECOVERED_ERROR
-} 
-BOT_StateTypeDef;  
-  
-typedef union 
+}
+BOT_StateTypeDef;
+
+typedef union
 {
   struct __CBW
   {
@@ -107,7 +107,7 @@ typedef union
     uint32_t Tag;
     uint32_t DataTransferLength;
     uint8_t  Flags;
-    uint8_t  LUN; 
+    uint8_t  LUN;
     uint8_t  CBLength;
     uint8_t  CB[16];
   }field;
@@ -115,7 +115,7 @@ typedef union
 }
 BOT_CBWTypeDef;
 
-typedef union 
+typedef union
 {
   struct __CSW
   {
@@ -130,32 +130,32 @@ BOT_CSWTypeDef;
 
 typedef struct
 {
-  uint32_t                   data[16];    
+  uint32_t                   data[16];
   BOT_StateTypeDef           state;
-  BOT_StateTypeDef           prev_state;  
+  BOT_StateTypeDef           prev_state;
   BOT_CMDStateTypeDef        cmd_state;
   BOT_CBWTypeDef             cbw;
   uint8_t                    Reserved1;
-  BOT_CSWTypeDef             csw; 
-  uint8_t                    Reserved2[3];  
+  BOT_CSWTypeDef             csw;
+  uint8_t                    Reserved2[3];
   uint8_t                    *pbuf;
-} 
+}
 BOT_HandleTypeDef;
 
 /**
   * @}
-  */ 
+  */
 
 
 
 /** @defgroup USBH_MSC_BOT_Exported_Defines
   * @{
-  */ 
+  */
 #define BOT_CBW_SIGNATURE            0x43425355
-#define BOT_CBW_TAG                  0x20304050             
-#define BOT_CSW_SIGNATURE            0x53425355           
+#define BOT_CBW_TAG                  0x20304050
+#define BOT_CSW_SIGNATURE            0x53425355
 #define BOT_CBW_LENGTH               31
-#define BOT_CSW_LENGTH               13     
+#define BOT_CSW_LENGTH               13
 
 
 
@@ -175,33 +175,33 @@ BOT_HandleTypeDef;
 #define USB_REQ_BOT_RESET                0xFF
 #define USB_REQ_GET_MAX_LUN              0xFE
 
-#define MAX_BULK_STALL_COUNT_LIMIT       0x04   /* If STALL is seen on Bulk 
-                                         Endpoint continuously, this means 
+#define MAX_BULK_STALL_COUNT_LIMIT       0x04   /* If STALL is seen on Bulk
+                                         Endpoint continuously, this means
                                          that device and Host has phase error
                                          Hence a Reset is needed */
 
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup USBH_MSC_BOT_Exported_Macros
   * @{
-  */ 
+  */
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup USBH_MSC_BOT_Exported_Variables
   * @{
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup USBH_MSC_BOT_Exported_FunctionsPrototype
   * @{
-  */ 
+  */
 USBH_StatusTypeDef USBH_MSC_BOT_REQ_Reset(USBH_HandleTypeDef *phost);
 USBH_StatusTypeDef USBH_MSC_BOT_REQ_GetMaxLUN(USBH_HandleTypeDef *phost, uint8_t *Maxlun);
 
@@ -213,7 +213,7 @@ USBH_StatusTypeDef USBH_MSC_BOT_Error(USBH_HandleTypeDef *phost, uint8_t lun);
 
 /**
   * @}
-  */ 
+  */
 
 #ifdef __cplusplus
 }
@@ -224,7 +224,7 @@ USBH_StatusTypeDef USBH_MSC_BOT_Error(USBH_HandleTypeDef *phost, uint8_t lun);
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
@@ -232,7 +232,7 @@ USBH_StatusTypeDef USBH_MSC_BOT_Error(USBH_HandleTypeDef *phost, uint8_t lun);
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
