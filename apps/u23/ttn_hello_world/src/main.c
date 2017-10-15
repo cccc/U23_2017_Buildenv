@@ -3,8 +3,8 @@
 #include "stm32f1xx_hal.h"
 
 #include "lmic.h"
+#include "lora-bone.h"
 
-UART_HandleTypeDef huart1;
 void UartSendStr(char *str);
 
 static void SystemClock_Config(void);
@@ -18,10 +18,10 @@ static void Error_Handler(void);
 static const u1_t APPEUI[8]  = { /* ADD 8 Byte APPEUI in LSB Format here */ };
 
 // unique device ID (LSBF)
-static const u1_t DEVEUI[8]  = { /* ADD 8 Byte DEVEUI in LSB Format here */ }; 
+static const u1_t DEVEUI[8]  = { /* ADD 8 Byte DEVEUI in LSB Format here */ };
 
 // device-specific AES key (derived from device EUI)(MSBF)
-static const u1_t DEVKEY[16] = { /* ADD 16 Byte DEVKEY in MSB Format here */ }; 
+static const u1_t DEVKEY[16] = { /* ADD 16 Byte DEVKEY in MSB Format here */ };
 
 static const char *hello_world_str = "Hello World!";
 
@@ -67,44 +67,12 @@ static void initfunc (osjob_t* j) {
 int main(int argc, char const *argv[])
 {
 	osjob_t initjob;
-	GPIO_InitTypeDef LED_PIN, UARTPIN;
-
-	LED_PIN.Mode	= GPIO_MODE_OUTPUT_PP;;
-	LED_PIN.Pin	= GPIO_PIN_13;
-	LED_PIN.Pull	= GPIO_NOPULL;
-	LED_PIN.Speed	= GPIO_SPEED_LOW;
 
 	HAL_Init();
 	SystemClock_Config();
 
-	__HAL_RCC_GPIOC_CLK_ENABLE();
-
-	HAL_GPIO_Init(GPIOC, &LED_PIN);
-	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_SET);
-
-	__HAL_RCC_USART1_CLK_ENABLE();
-	__HAL_RCC_GPIOA_CLK_ENABLE();
-
-	UARTPIN.Mode	= GPIO_MODE_AF_OD;
-	UARTPIN.Pull	= GPIO_PULLUP;
-	UARTPIN.Pin	= GPIO_PIN_9;
-	UARTPIN.Speed	= GPIO_SPEED_HIGH;
-	HAL_GPIO_Init(GPIOA, &UARTPIN);
-	UARTPIN.Mode	= GPIO_MODE_AF_INPUT;
-	UARTPIN.Pull	= GPIO_NOPULL;
-	UARTPIN.Pin	= GPIO_PIN_10;
-	HAL_GPIO_Init(GPIOA,&UARTPIN);
-
-	huart1.Instance		= USART1;
-	huart1.Init.Parity	= UART_PARITY_NONE;
-	huart1.Init.WordLength	= UART_WORDLENGTH_8B;
-	//huart1.Init.OverSampling = UART_OVERSAMPLING_16;
-	huart1.Init.Mode	= UART_MODE_TX;
-	huart1.Init.StopBits	= UART_STOPBITS_2;
-	huart1.Init.HwFlowCtl	= UART_HWCONTROL_NONE;
-	huart1.Init.BaudRate	= 115200;
-
-	HAL_UART_Init(&huart1);
+	bone_init();
+	bone_initUart1();
 
 	UartSendStr("Init LoRaWan Mac");
 
@@ -134,7 +102,7 @@ static osjob_t reportjob;
 
 // report sensor value every minute
 static void reportfunc (osjob_t* j) {
-	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET);
+	bone_set_led(true);
 	strncpy((char*)LMIC.frame, hello_world_str,64);
 	LMIC_setTxData2(1, LMIC.frame, strlen(hello_world_str), 0); // (port 1, 2 bytes, unconfirmed)
 	// reschedule job in 60 seconds
@@ -166,7 +134,7 @@ void onEvent (ev_t ev) {
 			break;
 		case EV_TXCOMPLETE:
 			UartSendStr("Send Complete");
-			HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_SET);
+			bone_set_led(false);
 			break;
 		case EV_RXCOMPLETE:
 			UartSendStr("Receive Complete");

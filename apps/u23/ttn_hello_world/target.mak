@@ -2,7 +2,7 @@
 TARGET = ttn_hello_world
 
 # List C source files here.
-CCSOURCES = main.c interrupts.c lmic-hal.c
+CCSOURCES = main.c interrupts.c
 
 # List C++ source files here.
 CXXSOURCES =
@@ -21,7 +21,7 @@ CXXFLAGS =
 ASFLAGS = -fdata-sections -ffunction-sections
 
 # Linker flags
-LDFLAGS := -lnosys -lc -Wl,--gc-sections
+LDFLAGS := -specs=rdimon.specs -lrdimon -lc -Wl,--gc-sections
 LDFLAGS += -mthumb -mcpu=cortex-m3
 LDFLAGS += -Wl,-T$(ROOT)/misc/linker/f1/STM32F103XB_FLASH.ld,-Map,$(SELF_DIR)/$(TARGET).map
 
@@ -32,7 +32,7 @@ INCLUDES = $(SELF_DIR)/inc \
 # Middlewares to add
 # source files are built with this target (specific for this target, so local header files are consideres)
 # include paths are added automatically
-MIDDLEWARES = cmsis stm32f1_device_103xb stm32f1_hal 
+MIDDLEWARES = cmsis stm32f1_device_103xb stm32f1_hal lora-bone_bsp 
 
 # Additional local static libs to link against
 LIBS = $(BINARY-ibm-lmic)
@@ -45,6 +45,5 @@ SRCDIR = src
 
 # Additional defines
 DEFINES := -DSTM32F103xB -DUSE_HAL_DRIVER -DCFG_eu868 -DCFG_sx1276_radio
-
 
 include $(ROOT)/build/targets/executable.mak
