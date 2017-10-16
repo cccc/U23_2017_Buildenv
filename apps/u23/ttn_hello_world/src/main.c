@@ -1,11 +1,10 @@
 #include <stdint.h>
 #include <string.h>
+#include <stdio.h>
 #include "stm32f1xx_hal.h"
 
 #include "lmic.h"
 #include "lora-bone.h"
-
-void UartSendStr(char *str);
 
 static void SystemClock_Config(void);
 static void Error_Handler(void);
@@ -42,13 +41,13 @@ int main(int argc, char const *argv[])
 	bone_init();
 	bone_initUart1();
 
-	UartSendStr("Init LoRaWan Mac");
+	printf("Init LoRaWan Mac\n");
 
 	os_init();
 
 	os_setCallback(&initjob, initfunc);
 	// execute scheduled jobs and events
-	UartSendStr("Going into LoRaWan Macs main loop");
+	printf("Going into LoRaWan Macs main loop\n");
 	os_runloop();
 	// (not reached)
 
@@ -87,34 +86,24 @@ void onEvent (ev_t ev) {
 
 	switch(ev) {
 		case EV_JOINING:
-			UartSendStr("Start Joining");
+			printf("Start Joining\n");
 			break;
 		// network joined, session established
 		case EV_JOINED:
-			UartSendStr("Joined");
-			// switch on LED
-			//debug_led(1);
-			// kick-off periodic sensor job
+			printf("Joined\n");
 			reportfunc(&reportjob);
 			break;
 		case EV_TXSTART:
-			UartSendStr("Start Send");
+			printf("Start Send\n");
 			break;
 		case EV_TXCOMPLETE:
-			UartSendStr("Send Complete");
+			printf("Send Complete\n");
 			bone_set_led(false);
 			break;
 		case EV_RXCOMPLETE:
-			UartSendStr("Receive Complete");
+			printf("Receive Complete\n");
 			break;
 	}
-}
-
-void UartSendStr(char *str)
-{
-	const char *ENDL = "\r\n";
-	HAL_UART_Transmit(&huart1,(uint8_t*)str,strlen(str),9999);
-	HAL_UART_Transmit(&huart1,(uint8_t*)ENDL,strlen(ENDL),9999);
 }
 
 /**

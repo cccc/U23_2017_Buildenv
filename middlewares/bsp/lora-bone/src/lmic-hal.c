@@ -152,7 +152,7 @@ u1_t hal_checkTimer (u4_t targettime)
  */
 void hal_failed (void)
 {
-	//UartSendStr("LMIC Hal failed");
+	printf("LMIC Hal failed\n");
 	while(1);
 }
 
