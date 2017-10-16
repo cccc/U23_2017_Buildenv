@@ -10,10 +10,13 @@ upload-gdb-$(TARGET): $(OBJDIR-$(TARGET))/$(TARGET).elf
 	$(Q)st-util >/dev/null & $(GDB) -ex "tar ext :4242" -ex "load $<" < /dev/null
 
 debug-$(TARGET): $(OBJDIR-$(TARGET))/$(TARGET).elf
-	st-util >/dev/null & $(GDB) -ex "tar ext :4242" $<
+	$(GDB) -ex "tar ext :3333" -ex "monitor arm semihosting enable" $<
 
+#debug-$(TARGET): $(OBJDIR-$(TARGET))/$(TARGET).elf
+#	st-util >/dev/null & $(GDB) -ex "tar ext :4242" $<
+#
 #upload-$(TARGET): $(OBJDIR-$(TARGET))/$(TARGET).bin
 #	$(call cmd_msg,STLINK,$<)
 #	$(Q)st-flash write $< 0x8000000
-#
-.PHONY: upload-$(TARGET) debug-$(TARGET)
+
+.PHONY: upload-$(TARGET) upload-gdb-$(TARGET) debug-$(TARGET)

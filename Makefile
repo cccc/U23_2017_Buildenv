@@ -15,4 +15,7 @@ SUBDIRS = middlewares libs apps
 SELF_DIR = $(abspath $(ROOT))
 $(call include-subdirs)
 
-.PHONY: all clean upload debug
+run-openocd-stm32f1:
+	openocd -f interface/stlink-v2.cfg -f target/stm32f1x.cfg
+
+.PHONY: all clean upload debug run-openocd-stm32f1
