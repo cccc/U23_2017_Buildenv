@@ -10,39 +10,7 @@ void UartSendStr(char *str);
 static void SystemClock_Config(void);
 static void Error_Handler(void);
 
-//////////////////////////////////////////////////
-// CONFIGURATION (FOR APPLICATION CALLBACKS BELOW)
-//////////////////////////////////////////////////
-
-// application router ID (LSBF)
-static const u1_t APPEUI[8]  = { /* ADD 8 Byte APPEUI in LSB Format here */ };
-
-// unique device ID (LSBF)
-static const u1_t DEVEUI[8]  = { /* ADD 8 Byte DEVEUI in LSB Format here */ };
-
-// device-specific AES key (derived from device EUI)(MSBF)
-static const u1_t DEVKEY[16] = { /* ADD 16 Byte DEVKEY in MSB Format here */ };
-
 static const char *hello_world_str = "Hello World!";
-
-//////////////////////////////////////////////////
-// APPLICATION CALLBACKS
-//////////////////////////////////////////////////
-
-// provide application router ID (8 bytes, LSBF)
-void os_getArtEui (u1_t* buf) {
-	memcpy(buf, APPEUI, 8);
-}
-
-// provide device ID (8 bytes, LSBF)
-void os_getDevEui (u1_t* buf) {
-	memcpy(buf, DEVEUI, 8);
-}
-
-// provide device key (16 bytes)
-void os_getDevKey (u1_t* buf) {
-	memcpy(buf, DEVKEY, 16);
-}
 
 //////////////////////////////////////////////////
 // MAIN - INITIALIZATION AND STARTUP

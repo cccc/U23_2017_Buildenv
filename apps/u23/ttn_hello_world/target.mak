@@ -2,7 +2,7 @@
 TARGET = ttn_hello_world
 
 # List C source files here.
-CCSOURCES = main.c interrupts.c
+CCSOURCES = main.c lora-ids.c interrupts.c
 
 # List C++ source files here.
 CXXSOURCES =
