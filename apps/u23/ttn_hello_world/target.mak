@@ -21,11 +21,11 @@ CXXFLAGS =
 ASFLAGS = -fdata-sections -ffunction-sections
 
 # Linker flags
-LDFLAGS := -specs=rdimon.specs -lc -Wl,--gc-sections
+LDFLAGS := -lc -Wl,--gc-sections
 # Uncomment this to enable semihosting
-# LDFLAGS += -lrdimon
+# LDFLAGS += -specs=rdimon.specs
 # Comment this when enable semihosting
-LDFLAGS += -lnosys
+LDFLAGS += -specs=nosys.specs
 LDFLAGS += -mthumb -mcpu=cortex-m3
 LDFLAGS += -Wl,-T$(ROOT)/misc/linker/f1/STM32F103XB_FLASH.ld,-Map,$(SELF_DIR)/$(TARGET).map
 
