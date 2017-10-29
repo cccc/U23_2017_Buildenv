@@ -1,8 +1,11 @@
 #include "lora-bone.h"
 
 SPI_HandleTypeDef hspi1;
+I2C_HandleTypeDef hi2c1;
 TIM_HandleTypeDef htim2;
 UART_HandleTypeDef huart1;
+
+static bool bone_bsp_initialized = false;
 
 // Initialize UART1 for use with lora-bone
 // Baudrate is 115200
@@ -47,8 +50,11 @@ void bone_initUart1()
 	huart1.Init.BaudRate	= 115200;
 
 	// Initialize Uart
-	HAL_UART_Init(&huart1);
-
+	if (HAL_UART_Init(&huart1) != HAL_OK)
+	{
+		printf("UART failed!\n");
+		while(1);
+	}
 }
 
 // Initialize SPI1 for use with lora-bone
@@ -121,8 +127,60 @@ void bone_initSpi1()
 	__HAL_RCC_SPI1_CLK_ENABLE();
 	
 	// Initialize SPI1
-	HAL_SPI_Init(&hspi1);
+	if (HAL_SPI_Init(&hspi1) != HAL_OK)
+	{
+		printf( "SPI Failed\n" );
+		while(1);
+	}
 }
+
+// Initialize I2C1 for use with lora-bone
+// I2C Speed will be 400 kbit/s
+void bone_initI2c1()
+{
+	static bool initialized = false;
+
+	// Only do initialization once
+	if (initialized)
+		return;
+	initialized = true;
+
+	// Turn GPIOB Clock on
+	__HAL_RCC_GPIOB_CLK_ENABLE();
+	
+	// Configure PB6 for SCL
+	HAL_GPIO_Init(GPIOB, &(GPIO_InitTypeDef){
+			.Mode = GPIO_MODE_AF_OD,
+			.Pin = GPIO_PIN_6,
+			.Pull = GPIO_NOPULL,
+			.Speed = GPIO_SPEED_HIGH
+		});
+	// Configure PB7 for SDA
+	HAL_GPIO_Init(GPIOB, &(GPIO_InitTypeDef){
+			.Mode = GPIO_MODE_AF_OD,
+			.Pin = GPIO_PIN_7,
+			.Pull = GPIO_NOPULL,
+			.Speed = GPIO_SPEED_HIGH
+		});
+
+	hi2c1.Instance = I2C1;
+	hi2c1.Init = (I2C_InitTypeDef){
+		.ClockSpeed = 400000,
+		.DutyCycle = I2C_DUTYCYCLE_2,
+		.AddressingMode = I2C_ADDRESSINGMODE_7BIT,
+		.GeneralCallMode = I2C_GENERALCALL_DISABLE,
+		.DualAddressMode = I2C_DUALADDRESS_DISABLE
+	};
+
+	// Turn I2C1 clock on
+	__HAL_RCC_I2C1_CLK_ENABLE();
+	// Init I2C1
+	if (HAL_I2C_Init(&hi2c1) != HAL_OK)
+	{
+		printf("I2C Failed\n");
+		while(1);
+	}
+}	
 
 // Initialize TIM2 for use with ibm-lmic
 void bone_initTim2()
@@ -165,12 +223,10 @@ void bone_initTim2()
 // setups the clock for our STM32F1 Board
 void bone_init()
 {
-	static bool initialized = false;
-
 	// Only do initialization once
-	if (initialized)
+	if (bone_bsp_initialized)
 		return;
-	initialized = true;
+	bone_bsp_initialized = true;
 
 	// Turn GPIOC Clock on
 	__HAL_RCC_GPIOC_CLK_ENABLE();
@@ -187,16 +243,25 @@ void bone_init()
 
 void bone_drive_CS1(bool value)
 {
+	if (!bone_bsp_initialized)
+		return;
+
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, (value)?GPIO_PIN_SET:GPIO_PIN_RESET);
 }
 
 void bone_set_led(bool value)
 {
+	if (!bone_bsp_initialized)
+		return;
+
 	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, (value)?GPIO_PIN_RESET:GPIO_PIN_SET);
 }
 
 void bone_toggle_led()
 {
+	if (!bone_bsp_initialized)
+		return;
+
 	HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
 }
 
