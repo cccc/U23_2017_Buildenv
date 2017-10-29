@@ -9,6 +9,7 @@ void TIM2_IRQHandler()
 	}
 }
 
+#ifndef NO_LMIC_SUPPORT
 // Interrupt Handler for DIO0
 void EXTI3_IRQHandler()
 {
@@ -35,5 +36,5 @@ void EXTI9_5_IRQHandler()
 		radio_irq_handler(2);
 	}
 }
-
+#endif
 

@@ -2,6 +2,7 @@
 
 uint32_t lmic_time = 0;
 
+#ifndef NO_LMIC_SUPPORT
 /*
  * initialize hardware (IO, SPI, TIMER, IRQ).
  */
@@ -155,4 +156,5 @@ void hal_failed (void)
 	printf("LMIC Hal failed\n");
 	while(1);
 }
+#endif
 

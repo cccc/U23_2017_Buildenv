@@ -6,8 +6,14 @@
 #include "stm32f1xx_hal.h"
 #include "cmsis_gcc.h"
 
+#ifndef NO_LMIC_SUPPORT
 #include "lmic.h"
 #include "oslmic.h"
+#else
+#ifndef OSTICKS_PER_SEC
+#define OSTICKS_PER_SEC 1000
+#endif
+#endif
 
 // Handle for SPI1
 // Use this Handle after calling bone_initSpi1()
