@@ -21,21 +21,24 @@ CXXFLAGS =
 ASFLAGS = -fdata-sections -ffunction-sections
 
 # Linker flags
-LDFLAGS := -lnosys -lc -Wl,--gc-sections
+LDFLAGS := -lc -Wl,--gc-sections
+# Uncomment this to enable semihosting
+#LDFLAGS += -specs=rdimon.specs -lrdimon
+# Comment this when enable semihosting
+LDFLAGS += -specs=nosys.specs
 LDFLAGS += -mthumb -mcpu=cortex-m3
 LDFLAGS += -Wl,-T$(ROOT)/misc/linker/f1/STM32F103XB_FLASH.ld,-Map,$(SELF_DIR)/$(TARGET).map
 
 # Additional include paths to consider
-INCLUDES = $(SELF_DIR)/inc \
-           $(ROOT)/libs/libdummy/inc
+INCLUDES = $(SELF_DIR)/inc
 
 # Middlewares to add
 # source files are built with this target (specific for this target, so local header files are consideres)
 # include paths are added automatically
-MIDDLEWARES = cmsis stm32f1_device_103xb stm32f1_hal 
+MIDDLEWARES = cmsis stm32f1_device_103xb stm32f1_hal lora-bone_bsp
 
 # Additional local static libs to link against
-LIBS = $(BINARY-libdummy)
+LIBS = 
 
 # Folder for object files
 OBJDIR = obj
@@ -44,6 +47,6 @@ OBJDIR = obj
 SRCDIR = src
 
 # Additional defines
-DEFINES := -DSTM32F103xB -DUSE_HAL_DRIVER
+DEFINES := -DSTM32F103xB -DUSE_HAL_DRIVER -DNO_LMIC_SUPPORT
 
 include $(ROOT)/build/targets/executable.mak

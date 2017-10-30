@@ -3,6 +3,8 @@
 #include "stm32f1xx_hal.h"
 #include "stm32f1xx_hal_conf.h"
 
+#include "lora-bone.h"
+
 static void SystemClock_Config(void);
 static void Error_Handler(void);
 
@@ -13,24 +15,14 @@ static void Error_Handler(void);
  */
 int main(int argc, char const *argv[])
 {
-	GPIO_InitTypeDef LED_PIN;
-
-	LED_PIN.Mode = GPIO_MODE_OUTPUT_PP;;
-	LED_PIN.Pin = GPIO_PIN_13;
-	LED_PIN.Pull = GPIO_NOPULL;
-	LED_PIN.Speed = GPIO_SPEED_LOW;
-	
 	HAL_Init();
 	SystemClock_Config();
 
-	__HAL_RCC_GPIOC_CLK_ENABLE();
-
-	HAL_GPIO_Init(GPIOC, &LED_PIN);
+	bone_init();
 
 	while(1)
 	{
-		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
-		
+		bone_toggle_led();
 		HAL_Delay(500);
 	}
 
