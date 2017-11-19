@@ -10,7 +10,10 @@ upload-gdb-$(TARGET): $(OBJDIR-$(TARGET))/$(TARGET).elf
 	$(Q)st-util >/dev/null & $(GDB) -ex "tar ext :4242" -ex "load $<" < /dev/null
 
 debug-$(TARGET): $(OBJDIR-$(TARGET))/$(TARGET).elf
-	$(GDB) -ex "tar ext :3333" -ex "monitor arm semihosting enable" $<
+	# Uncomment this when enabling semihosting
+	#$(GDB) -ex "tar ext :3333" -ex "monitor arm semihosting enable" $<
+	# Comment this when enabling semihosting
+	$(GDB) -ex "tar ext :3333" $<
 
 #debug-$(TARGET): $(OBJDIR-$(TARGET))/$(TARGET).elf
 #	st-util >/dev/null & $(GDB) -ex "tar ext :4242" $<
